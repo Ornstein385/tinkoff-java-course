@@ -1,5 +1,6 @@
 app:
-  telegram-token: unset
+  telegramToken: 6379106394:AAGx-SZur6HE-KEhKXSyT9MGSJoYnvfYGME
+  telegramName: vf_scrapper_bot
 
 spring:
   application:

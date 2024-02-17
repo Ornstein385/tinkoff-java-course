@@ -23,14 +23,15 @@
         <Logger name="org.postgresql" level="WARN"/>
         <Logger name="org.springframework" level="WARN"/>
         <Logger name="org.springframework.cache" level="WARN"/>
-        <Logger name="org.springframework.security" level="DEBUG"/>
-        <Logger name="org.springframework.web" level="DEBUG"/>
+        <Logger name="org.springframework.security" level="WARN"/> <!-- Изменено с DEBUG на WARN -->
+        <Logger name="org.springframework.web" level="WARN"/> <!-- Изменено с DEBUG на WARN -->
         <Logger name="sun.rmi" level="WARN"/>
         <Logger name="sun.rmi.transport" level="WARN"/>
+        <Logger name="com.pengrad.telegrambot" level="WARN"/>
 
-        <Logger name="edu.java" level="TRACE"/>
+        <Logger name="edu.java" level="WARN"/> <!-- Изменено с TRACE на WARN -->
 
-        <Root level="INFO">
+        <Root level="WARN"> <!-- Изменено с INFO на WARN -->
             <AppenderRef ref="STDOUT_PLAIN"/>
         </Root>
     </Loggers>
