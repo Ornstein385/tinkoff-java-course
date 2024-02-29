@@ -1,4 +1,4 @@
-package edu.java.conttrollers;
+package edu.java.conttroller;
 
 public class StackOverflowController {
 }

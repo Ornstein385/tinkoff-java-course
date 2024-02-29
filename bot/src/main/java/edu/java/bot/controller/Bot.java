@@ -1,4 +1,4 @@
-package edu.java.bot.controllers;
+package edu.java.bot.controller;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
@@ -8,7 +8,7 @@ import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SetMyCommands;
 import edu.java.bot.configuration.ApplicationConfig;
 import edu.java.bot.dao.LinkDaoInterface;
-import edu.java.bot.models.Link;
+import edu.java.bot.model.Link;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
