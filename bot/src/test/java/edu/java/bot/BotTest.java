@@ -10,7 +10,6 @@ import edu.java.bot.controllers.Bot;
 import edu.java.bot.dao.LinkDaoInterface;
 import edu.java.bot.dao.LinkTemporaryDaoImpl;
 import edu.java.bot.models.Link;
-import java.lang.reflect.Field;
 import java.util.Collection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,15 +42,10 @@ public class BotTest {
     private Bot bot;
 
     @BeforeEach
-    public void setUp() throws IllegalAccessException, NoSuchFieldException {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
         when(config.getTelegramToken()).thenReturn("dummy_token");
-        bot = new Bot(config, linkDao);
-
-        // Внедряем мок telegramBot в bot через рефлексию
-        Field botField = Bot.class.getDeclaredField("bot");
-        botField.setAccessible(true);
-        botField.set(bot, telegramBot);
+        bot = new Bot(config, linkDao, telegramBot);
     }
 
     @Test
@@ -121,7 +115,7 @@ public class BotTest {
         when(update2.message().text()).thenReturn("/track " + url);
         when(update2.message().from().id()).thenReturn(chatId);
 
-        bot = new Bot(config, linkDao);
+        bot = new Bot(config, linkDao, telegramBot);
 
         bot.handleUpdate(update1);
         bot.handleUpdate(update2);
@@ -160,7 +154,7 @@ public class BotTest {
         when(update2.message().text()).thenReturn("/untrack " + url);
         when(update2.message().from().id()).thenReturn(chatId);
 
-        bot = new Bot(config, linkDao);
+        bot = new Bot(config, linkDao, telegramBot);
 
         bot.handleUpdate(update1);
         bot.handleUpdate(update2);

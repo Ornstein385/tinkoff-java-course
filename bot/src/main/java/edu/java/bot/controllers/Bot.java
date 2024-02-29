@@ -32,10 +32,10 @@ public class Bot {
     private static final String NOT_SUPPORTED = "ресурс пока не поддерживается";
 
     @Autowired
-    public Bot(ApplicationConfig config, LinkDaoInterface linkDao) {
+    public Bot(ApplicationConfig config, LinkDaoInterface linkDao, TelegramBot bot) {
         this.config = config;
         this.linkDao = linkDao;
-        this.bot = new TelegramBot(config.getTelegramToken());
+        this.bot = bot;
         setUpBot();
         setBotCommands();
     }

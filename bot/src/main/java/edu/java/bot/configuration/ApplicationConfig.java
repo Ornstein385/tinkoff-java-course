@@ -1,18 +1,20 @@
 package edu.java.bot.configuration;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
 
-@Component
 @Getter
+@Setter
+@Validated
+@ConfigurationProperties(prefix = "app", ignoreUnknownFields = false)
 public class ApplicationConfig {
 
-    //@NotEmpty
-    @Value("${app.telegramToken}")
+    @NotEmpty
     private String telegramToken;
 
-    //@NotEmpty
-    @Value("${app.telegramName}")
+    @NotEmpty
     private String telegramName;
 }
