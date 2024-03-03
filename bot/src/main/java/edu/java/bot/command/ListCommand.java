@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ListCommand extends Command {
 
-    protected ListCommand(TelegramBot bot, LinkDaoInterface linkDao) {
+    public ListCommand(TelegramBot bot, LinkDaoInterface linkDao) {
         super(bot, linkDao);
     }
 

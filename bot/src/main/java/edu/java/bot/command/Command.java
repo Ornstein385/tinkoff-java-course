@@ -5,7 +5,7 @@ import edu.java.bot.dao.LinkDaoInterface;
 
 public abstract class Command {
 
-    protected Command(TelegramBot bot, LinkDaoInterface linkDao) {
+    public Command(TelegramBot bot, LinkDaoInterface linkDao) {
         this.bot = bot;
         this.linkDao = linkDao;
     }

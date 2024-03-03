@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class HelpCommand extends Command {
 
-    protected HelpCommand(TelegramBot bot, LinkDaoInterface linkDao) {
+    public HelpCommand(TelegramBot bot, LinkDaoInterface linkDao) {
         super(bot, linkDao);
     }
 

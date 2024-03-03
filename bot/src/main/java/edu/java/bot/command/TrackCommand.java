@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TrackCommand extends Command {
 
-    protected TrackCommand(TelegramBot bot, LinkDaoInterface linkDao) {
+    public TrackCommand(TelegramBot bot, LinkDaoInterface linkDao) {
         super(bot, linkDao);
     }
 

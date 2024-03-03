@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UntrackCommand extends Command {
 
-    protected UntrackCommand(TelegramBot bot, LinkDaoInterface linkDao) {
+    public UntrackCommand(TelegramBot bot, LinkDaoInterface linkDao) {
         super(bot, linkDao);
     }
 

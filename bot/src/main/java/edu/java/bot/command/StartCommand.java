@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class StartCommand extends Command {
 
-    protected StartCommand(TelegramBot bot, LinkDaoInterface linkDao) {
+    public StartCommand(TelegramBot bot, LinkDaoInterface linkDao) {
         super(bot, linkDao);
     }
 
