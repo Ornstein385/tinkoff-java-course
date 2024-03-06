@@ -1,249 +1,140 @@
 package edu.java.bot;
 
 import com.pengrad.telegrambot.TelegramBot;
-import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
-import com.pengrad.telegrambot.model.User;
 import com.pengrad.telegrambot.request.SendMessage;
+import edu.java.bot.command.CommandKeeper;
+import edu.java.bot.command.HelpCommand;
+import edu.java.bot.command.ListCommand;
+import edu.java.bot.command.StartCommand;
+import edu.java.bot.command.TrackCommand;
+import edu.java.bot.command.UntrackCommand;
 import edu.java.bot.configuration.ApplicationConfig;
-import edu.java.bot.controller.Bot;
 import edu.java.bot.dao.LinkDaoInterface;
-import edu.java.bot.dao.LinkTemporaryDaoImpl;
-import edu.java.bot.model.Link;
-import java.lang.reflect.Field;
-import java.util.Collection;
+import edu.java.bot.models.Link;
+import edu.java.bot.telegram.Bot;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyLong;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class BotTest {
 
     @Mock
-    private TelegramBot telegramBot;
-
+    private TelegramBot bot;
     @Mock
     private ApplicationConfig config;
-
     @Spy
     private LinkDaoInterface linkDao;
+    @Spy
+    private CommandKeeper commandKeeper;
 
     @InjectMocks
-    private Bot bot;
+    private Bot testBot;
+
+    @Captor
+    private ArgumentCaptor<SendMessage> sendMessageCaptor;
 
     @BeforeEach
-    public void setUp() throws IllegalAccessException, NoSuchFieldException {
+    public void setup() {
         MockitoAnnotations.openMocks(this);
-        when(config.getTelegramToken()).thenReturn("dummy_token");
-        bot = new Bot(config, linkDao);
 
-        // Внедряем мок telegramBot в bot через рефлексию
-        Field botField = Bot.class.getDeclaredField("bot");
-        botField.setAccessible(true);
-        botField.set(bot, telegramBot);
+        HelpCommand helpCommand = new HelpCommand(bot, linkDao);
+        helpCommand.setCommandKeeper(commandKeeper);
+        commandKeeper.setupCommands(Arrays.asList(new StartCommand(bot, linkDao), new TrackCommand(bot, linkDao),
+            new UntrackCommand(bot, linkDao), new ListCommand(bot, linkDao), helpCommand
+        ));
+    }
+
+    private void simulateUpdate(String text, long userId) {
+        Update mockUpdate = mock(Update.class);
+        when(mockUpdate.message()).thenReturn(mock(com.pengrad.telegrambot.model.Message.class));
+        when(mockUpdate.message().text()).thenReturn(text);
+        when(mockUpdate.message().from()).thenReturn(mock(com.pengrad.telegrambot.model.User.class));
+        when(mockUpdate.message().from().id()).thenReturn(userId);
+
+        testBot.handleUpdate(mockUpdate);
     }
 
     @Test
-    public void testTrackSupportedUrl() {
-        String supportedUrl = "https://github.com/example";
-        long chatId = 123456L;
-
-        Update update = mock(Update.class);
-        Message message = mock(Message.class);
-        User user = mock(User.class);
-
-        when(update.message()).thenReturn(message);
-        when(message.text()).thenReturn("/track " + supportedUrl);
-        when(message.from()).thenReturn(user);
-        when(user.id()).thenReturn(chatId);
-
-        bot.handleUpdate(update);
-
-        verify(linkDao, times(1)).add(any(Link.class));
+    public void testStartCommand() {
+        simulateUpdate("/start", 123L);
+        verify(bot).execute(sendMessageCaptor.capture());
+        assertEquals("вы зарегистрированы", sendMessageCaptor.getValue().getParameters().get("text"));
     }
 
     @Test
-    public void testTrackUnsupportedUrl() {
-        String unsupportedUrl = "https://unsupported.com/example";
-        long chatId = 123456L;
-
-        Update update = mock(Update.class);
-        Message message = mock(Message.class);
-        User user = mock(User.class);
-
-        when(update.message()).thenReturn(message);
-        when(message.text()).thenReturn("/track " + unsupportedUrl);
-        when(message.from()).thenReturn(user);
-        when(user.id()).thenReturn(chatId);
-
-        bot.handleUpdate(update);
-
-        verify(linkDao, never()).add(any(Link.class));
+    public void testHelpCommand() {
+        simulateUpdate("/help", 123L);
+        verify(bot).execute(sendMessageCaptor.capture());
+        assertNotEquals("", sendMessageCaptor.getValue().getParameters().get("text"));
     }
 
     @Test
-    public void testDoubleAdditionOfLink() {
-        String url = "https://github.com/doubleAddTest";
-        long chatId = 123456L;
-
-        linkDao = new LinkTemporaryDaoImpl();
-
-        Update update1 = mock(Update.class);
-        Update update2 = mock(Update.class);
-
-        Message message1 = mock(Message.class);
-        User user1 = mock(User.class);
-        Message message2 = mock(Message.class);
-        User user2 = mock(User.class);
-
-        Link link = new Link(chatId, url);
-
-        when(update1.message()).thenReturn(message1);
-        when(update2.message()).thenReturn(message2);
-        when(message1.from()).thenReturn(user1);
-        when(user1.id()).thenReturn(chatId);
-        when(message2.from()).thenReturn(user2);
-        when(user2.id()).thenReturn(chatId);
-
-        when(update1.message().text()).thenReturn("/track " + url);
-        when(update1.message().from().id()).thenReturn(chatId);
-        when(update2.message().text()).thenReturn("/track " + url);
-        when(update2.message().from().id()).thenReturn(chatId);
-
-        bot = new Bot(config, linkDao);
-
-        bot.handleUpdate(update1);
-        bot.handleUpdate(update2);
-
-        Collection<Link> links = linkDao.getAll(chatId);
-        assertEquals(1, links.size());
-        assertTrue(links.contains(link));
+    public void testTrackCommandWithValidDomain() {
+        simulateUpdate("/track https://github.com/user/repo", 123L);
+        verify(linkDao).add(any());
     }
 
     @Test
-    public void testDoubleRemovalOfLink() {
-        String url = "https://github.com/doubleRemoveTest";
-        long chatId = 123456L;
-
-        linkDao = new LinkTemporaryDaoImpl();
-        Link link = new Link(chatId, url);
-        linkDao.add(link);
-
-        Update update1 = mock(Update.class);
-        Update update2 = mock(Update.class);
-
-        Message message1 = mock(Message.class);
-        User user1 = mock(User.class);
-        Message message2 = mock(Message.class);
-        User user2 = mock(User.class);
-
-        when(update1.message()).thenReturn(message1);
-        when(update2.message()).thenReturn(message2);
-        when(message1.from()).thenReturn(user1);
-        when(user1.id()).thenReturn(chatId);
-        when(message2.from()).thenReturn(user2);
-        when(user2.id()).thenReturn(chatId);
-
-        when(update1.message().text()).thenReturn("/untrack " + url);
-        when(update1.message().from().id()).thenReturn(chatId);
-        when(update2.message().text()).thenReturn("/untrack " + url);
-        when(update2.message().from().id()).thenReturn(chatId);
-
-        bot = new Bot(config, linkDao);
-
-        bot.handleUpdate(update1);
-        bot.handleUpdate(update2);
-
-        Collection<Link> links = linkDao.getAll(chatId);
-        assertTrue(links.isEmpty());
+    public void testTrackCommandWithInvalidDomain() {
+        simulateUpdate("/track https://example.com/page", 123L);
+        verify(bot).execute(sendMessageCaptor.capture());
+        assertEquals("ресурс пока не поддерживается", sendMessageCaptor.getValue().getParameters().get("text"));
     }
 
     @Test
-    public void testExecutionOfNonexistentCommand() {
-        long chatId = 123456L;
-        String nonExistentCommand = "/nonexistent";
-
-        Update update = mock(Update.class);
-        Message message = mock(Message.class);
-        User user = mock(User.class);
-
-        when(update.message()).thenReturn(message);
-        when(message.text()).thenReturn(nonExistentCommand);
-        when(message.from()).thenReturn(user);
-        when(user.id()).thenReturn(chatId);
-
-        bot.handleUpdate(update);
-
-        ArgumentCaptor<SendMessage> sendMessageCaptor = ArgumentCaptor.forClass(SendMessage.class);
-        verify(telegramBot).execute(sendMessageCaptor.capture());
-
-        SendMessage sentRequest = sendMessageCaptor.getValue();
-
-        assertEquals(chatId, sentRequest.getParameters().get("chat_id"));
-        assertTrue(sentRequest.getParameters().get("text").toString().contains("команда не существует"));
+    public void testUntrackCommandWithExistingLink() {
+        simulateUpdate("/untrack https://github.com/user/repo", 123L);
+        verify(linkDao).remove(any());
     }
 
     @Test
-    public void testExecutionOfNonCommand() {
-        long chatId = 123456L;
-        String someText = "someText";
-
-        Update update = mock(Update.class);
-        Message message = mock(Message.class);
-        User user = mock(User.class);
-
-        when(update.message()).thenReturn(message);
-        when(message.text()).thenReturn(someText);
-        when(message.from()).thenReturn(user);
-        when(user.id()).thenReturn(chatId);
-
-        bot.handleUpdate(update);
-
-        ArgumentCaptor<SendMessage> sendMessageCaptor = ArgumentCaptor.forClass(SendMessage.class);
-        verify(telegramBot).execute(sendMessageCaptor.capture());
-
-        SendMessage sentRequest = sendMessageCaptor.getValue();
-
-        assertEquals(chatId, sentRequest.getParameters().get("chat_id"));
-        assertTrue(sentRequest.getParameters().get("text").toString().contains("нужно использовать одну из существующих команд"));
+    public void testListCommandWithNoLinks() {
+        when(linkDao.getSize(anyLong())).thenReturn(0);
+        simulateUpdate("/list", 123L);
+        verify(bot).execute(sendMessageCaptor.capture());
+        assertEquals("нет отслеживаемых ссылок", sendMessageCaptor.getValue().getParameters().get("text"));
     }
 
     @Test
-    public void testEmptyTrackListMessage() {
-        long chatId = 123456L;
-        String listCommand = "/list";
-
-        linkDao = new LinkTemporaryDaoImpl();
-
-        Update update = mock(Update.class);
-        Message message = mock(Message.class);
-        User user = mock(User.class);
-
-        when(update.message()).thenReturn(message);
-        when(message.text()).thenReturn(listCommand);
-        when(message.from()).thenReturn(user);
-        when(user.id()).thenReturn(chatId);
-
-        bot.handleUpdate(update);
-
-        ArgumentCaptor<SendMessage> sendMessageCaptor = ArgumentCaptor.forClass(SendMessage.class);
-        verify(telegramBot).execute(sendMessageCaptor.capture());
-
-        SendMessage sentRequest = sendMessageCaptor.getValue();
-
-        assertEquals(chatId, sentRequest.getParameters().get("chat_id"));
-        assertTrue(sentRequest.getParameters().get("text").toString().contains("нет отслеживаемых ссылок"));
+    public void testListCommandWithLinks() {
+        when(linkDao.getSize(anyLong())).thenReturn(1);
+        when(linkDao.getAll(anyLong())).thenReturn(List.of(new Link(123L, "https://github.com/user/repo")));
+        simulateUpdate("/list", 123L);
+        verify(bot).execute(sendMessageCaptor.capture());
+        String messageText = (String) sendMessageCaptor.getValue().getParameters().get("text");
+        assertTrue(messageText.contains("https://github.com/user/repo"));
     }
 
+    @Test
+    public void testUnknownCommand() {
+        simulateUpdate("/unknown", 123L);
+        verify(bot).execute(sendMessageCaptor.capture());
+        assertEquals("команда не существует", sendMessageCaptor.getValue().getParameters().get("text"));
+    }
+
+    @Test
+    public void testNonCommandMessage() {
+        simulateUpdate("SomeText", 123L);
+        verify(bot).execute(sendMessageCaptor.capture());
+        assertEquals(
+            "нужно использовать одну из существующих команд",
+            sendMessageCaptor.getValue().getParameters().get("text")
+        );
+    }
 }
