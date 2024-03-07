@@ -11,7 +11,7 @@ import edu.java.bot.command.TrackCommand;
 import edu.java.bot.command.UntrackCommand;
 import edu.java.bot.configuration.ApplicationConfig;
 import edu.java.bot.dao.LinkDaoInterface;
-import edu.java.bot.models.Link;
+import edu.java.bot.model.Link;
 import edu.java.bot.telegram.Bot;
 import java.util.Arrays;
 import java.util.List;

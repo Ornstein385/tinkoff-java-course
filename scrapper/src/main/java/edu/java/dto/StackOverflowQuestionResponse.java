@@ -2,46 +2,16 @@ package edu.java.dto;
 
 import java.time.OffsetDateTime;
 import java.util.List;
-import lombok.Data;
 
-@Data
-public class StackOverflowQuestionResponse {
+public record StackOverflowQuestionResponse(List<Item> items, boolean hasMore, int quotaMax, int quotaRemaining) {
 
-    private List<Item> items;
-    private boolean hasMore;
-    private int quotaMax;
-    private int quotaRemaining;
+    public record Item(List<String> tags, Owner owner, boolean isAnswered, int viewCount, OffsetDateTime protectedDate,
+                       Integer acceptedAnswerId, int answerCount, OffsetDateTime communityOwnedDate, int score,
+                       OffsetDateTime lastActivityDate, OffsetDateTime creationDate, OffsetDateTime lastEditDate,
+                       long questionId, String contentLicense, String link, String title) {
 
-    @Data
-    public static class Item {
-        private List<String> tags;
-        private Owner owner;
-        private boolean isAnswered;
-        private int viewCount;
-        private OffsetDateTime protectedDate;
-        private Integer acceptedAnswerId;
-        private int answerCount;
-        private OffsetDateTime communityOwnedDate;
-        private int score;
-        private OffsetDateTime lastActivityDate;
-        private OffsetDateTime creationDate;
-        private OffsetDateTime lastEditDate;
-        private long questionId;
-        private String contentLicense;
-        private String link;
-        private String title;
-
-        @Data
-        public static class Owner {
-            private int accountId;
-            private int reputation;
-            private int userId;
-            private String userType;
-            private Integer acceptRate;
-            private String profileImage;
-            private String displayName;
-            private String link;
-
+        public record Owner(int accountId, int reputation, int userId, String userType, Integer acceptRate,
+                            String profileImage, String displayName, String link) {
         }
     }
 }

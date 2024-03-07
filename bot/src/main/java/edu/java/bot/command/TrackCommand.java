@@ -3,7 +3,7 @@ package edu.java.bot.command;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.request.SendMessage;
 import edu.java.bot.dao.LinkDaoInterface;
-import edu.java.bot.models.Link;
+import edu.java.bot.model.Link;
 import edu.java.bot.telegram.AllowedDomainChecker;
 import org.springframework.stereotype.Component;
 
