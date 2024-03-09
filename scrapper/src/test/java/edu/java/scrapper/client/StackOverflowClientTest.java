@@ -31,7 +31,7 @@ public class StackOverflowClientTest extends ClientTest {
     }
 
     @Test
-    public void testGettingRepositoryInfo() throws IOException {
+    public void testGettingQuestionInfo() throws IOException {
         File file = ResourceUtils.getFile("classpath:stackoverflowQuestionResponse.json");
         String json = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
 
@@ -50,7 +50,7 @@ public class StackOverflowClientTest extends ClientTest {
     }
 
     @Test
-    public void testResponseOnInvalidRepository() throws IOException {
+    public void testResponseOnInvalidQuestion() throws IOException {
         File file = ResourceUtils.getFile("classpath:stackoverflowQuestionNotFound.json");
         String json = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
 
