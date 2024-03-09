@@ -2,7 +2,6 @@ package edu.java.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
-import java.util.List;
 
 public record GitHubRepoResponse(
     @JsonProperty("id") long id,
