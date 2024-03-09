@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class AllowedDomainChecker {
-    private static final HashSet<String> allowedDomains = new HashSet<>(List.of("github.com", "stackoverflow.com"));
+    private static HashSet<String> allowedDomains = new HashSet<>(List.of("github.com", "stackoverflow.com"));
 
     //тут может быть более сложная проверка
     public static boolean isAllowed(Link link) {
