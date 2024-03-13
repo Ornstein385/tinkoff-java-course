@@ -10,6 +10,7 @@ public class ClientConfig {
 
     private String defaultGithubBaseUrl = "https://api.github.com";
     private String defaultStackOverflowBaseUrl = "https://api.stackexchange.com/2.3";
+    private String defaultBotBaseUrl = "http://localhost:8090";
 
     @Bean
     public WebClient githubWebClient(@Value("${github.base.url:#{null}}") String baseUrl) {
@@ -22,6 +23,13 @@ public class ClientConfig {
     public WebClient stackOverflowWebClient(@Value("${stackoverflow.base.url:#{null}}") String baseUrl) {
         return WebClient.builder()
             .baseUrl(baseUrl != null ? baseUrl : defaultStackOverflowBaseUrl)
+            .build();
+    }
+
+    @Bean
+    public WebClient botWebClient(@Value("${bot.base.url:#{null}}") String baseUrl) {
+        return WebClient.builder()
+            .baseUrl(baseUrl != null ? baseUrl : defaultBotBaseUrl)
             .build();
     }
 }
