@@ -7,7 +7,7 @@ import java.util.HashSet;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LinkTemporaryDaoImpl implements LinkDaoInterface {
+public class LinkDaoMockImpl implements LinkDaoInterface {
 
     private HashMap<Long, HashSet<Link>> tracked = new HashMap<>();
 
