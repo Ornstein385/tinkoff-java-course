@@ -1,6 +1,6 @@
 package edu.java.client;
 
-import edu.java.dto.api.request.LinkUpdateRequest;
+import edu.java.dto.api.internal.request.LinkUpdateRequest;
 
 public interface BotClient {
 

@@ -1,9 +1,9 @@
 package edu.java.controller;
 
-import edu.java.dto.api.request.AddLinkRequest;
-import edu.java.dto.api.request.RemoveLinkRequest;
-import edu.java.dto.api.response.LinkResponse;
-import edu.java.dto.api.response.ListLinksResponse;
+import edu.java.dto.api.internal.request.AddLinkRequest;
+import edu.java.dto.api.internal.request.RemoveLinkRequest;
+import edu.java.dto.api.internal.response.LinkResponse;
+import edu.java.dto.api.internal.response.ListLinksResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

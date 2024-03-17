@@ -6,7 +6,7 @@ import edu.java.configuration.ClientConfig;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import edu.java.dto.StackOverflowQuestionResponse;
+import edu.java.dto.api.external.StackOverflowQuestionResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;

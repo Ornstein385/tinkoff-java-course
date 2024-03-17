@@ -1,4 +1,4 @@
-package edu.java.dto.api.response;
+package edu.java.dto.api.internal.response;
 
 import java.net.URI;
 import lombok.Data;
