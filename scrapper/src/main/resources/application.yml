@@ -9,7 +9,7 @@ spring:
     name: scrapper
 
 server:
-  port: 8080
+  port: 8091
 
 logging:
   config: classpath:log4j2-plain.xml
@@ -21,3 +21,12 @@ stackoverflow:
 github:
   base:
     url: https://api.github.com
+
+bot:
+  base:
+    url: http://localhost:8090
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+  default-produces-media-type: application/json

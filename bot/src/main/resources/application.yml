@@ -13,3 +13,12 @@ server:
 
 logging:
   config: classpath:log4j2-plain.xml
+
+scrapper:
+  base:
+    url: http://localhost:8091
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+  default-produces-media-type: application/json
