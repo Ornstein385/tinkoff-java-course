@@ -1,4 +1,4 @@
-package edu.java.scrapper;
+package edu.java.scrapper.integration;
 
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -7,7 +7,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
-public abstract class IntegrationTest {
+public abstract class TemplateIntegrationTest {
     public static PostgreSQLContainer<?> POSTGRES;
 
     static {
