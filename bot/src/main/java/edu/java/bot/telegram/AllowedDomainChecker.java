@@ -1,6 +1,6 @@
 package edu.java.bot.telegram;
 
-import edu.java.bot.models.Link;
+import edu.java.bot.model.Link;
 import java.util.HashSet;
 import java.util.List;
 
@@ -9,10 +9,7 @@ public class AllowedDomainChecker {
 
     //тут может быть более сложная проверка
     public static boolean isAllowed(Link link) {
-        if (link.getDomain() != null && allowedDomains.contains(link.getDomain())) {
-            return true;
-        }
-        return false;
+        return link.getDomain() != null && allowedDomains.contains(link.getDomain());
     }
 
     private AllowedDomainChecker() {
