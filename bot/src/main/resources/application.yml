@@ -1,5 +1,6 @@
 app:
-  telegram-token: unset
+  telegram-token:
+  telegram-name: vf_scrapper_bot
 
 spring:
   application:
