@@ -1,18 +1,22 @@
 package edu.java.bot.command;
 
-import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import edu.java.bot.dao.LinkDaoInterface;
 import edu.java.bot.model.Link;
 import edu.java.bot.telegram.AllowedDomainChecker;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TrackCommand extends Command {
+public class TrackCommand implements Command {
 
-    public TrackCommand(TelegramBot bot, LinkDaoInterface linkDao) {
-        super(bot, linkDao);
+    @Autowired
+    public void setLinkDao(LinkDaoInterface linkDao) {
+        this.linkDao = linkDao;
     }
+
+    public LinkDaoInterface linkDao;
 
     @Override
     public String getCommand() {
@@ -25,12 +29,18 @@ public class TrackCommand extends Command {
     }
 
     @Override
-    public void handle(long id, String[] args) {
-        Link link = new Link(id, args[0]);
+    public SendMessage handle(Update update) {
+        long id = update.message().from().id();
+        String[] parts = update.message().text().split(" ");
+        if (parts.length < 2) {
+            return new SendMessage(id, "некорректный формат команды");
+        }
+        Link link = new Link(id, parts[1]);
         if (AllowedDomainChecker.isAllowed(link)) {
             linkDao.add(link);
+            return new SendMessage(id, "ссылка добавлена для отслеживания");
         } else {
-            bot.execute(new SendMessage(id, "ресурс пока не поддерживается"));
+            return new SendMessage(id, "ресурс пока не поддерживается");
         }
     }
 }

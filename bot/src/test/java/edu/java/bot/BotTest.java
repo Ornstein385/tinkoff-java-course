@@ -50,14 +50,26 @@ public class BotTest {
     private ArgumentCaptor<SendMessage> sendMessageCaptor;
 
     @BeforeEach
-    public void setup() {
+    public void setupBeforeEach() {
         MockitoAnnotations.openMocks(this);
 
-        HelpCommand helpCommand = new HelpCommand(bot, linkDao);
-        helpCommand.setCommandKeeper(commandKeeper);
-        commandKeeper.setupCommands(Arrays.asList(new StartCommand(bot, linkDao), new TrackCommand(bot, linkDao),
-            new UntrackCommand(bot, linkDao), new ListCommand(bot, linkDao), helpCommand
+        StartCommand startCommand = new StartCommand();
+        TrackCommand trackCommand = new TrackCommand();
+        UntrackCommand untrackCommand = new UntrackCommand();
+        ListCommand listCommand = new ListCommand();
+        HelpCommand helpCommand = new HelpCommand();
+        commandKeeper.setupCommands(Arrays.asList(
+            startCommand,
+            trackCommand,
+            untrackCommand,
+            listCommand,
+            helpCommand
         ));
+
+        trackCommand.setLinkDao(linkDao);
+        untrackCommand.setLinkDao(linkDao);
+        listCommand.setLinkDao(linkDao);
+        helpCommand.setCommands(Arrays.stream(commandKeeper.getAll()).toList());
     }
 
     private void simulateUpdate(String text, long userId) {

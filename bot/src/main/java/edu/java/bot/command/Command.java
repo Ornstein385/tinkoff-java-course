@@ -1,21 +1,13 @@
 package edu.java.bot.command;
 
-import com.pengrad.telegrambot.TelegramBot;
-import edu.java.bot.dao.LinkDaoInterface;
+import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.request.SendMessage;
 
-public abstract class Command {
+public interface Command {
 
-    public Command(TelegramBot bot, LinkDaoInterface linkDao) {
-        this.bot = bot;
-        this.linkDao = linkDao;
-    }
+    String getCommand();
 
-    public abstract String getCommand();
+    String getDescription();
 
-    public abstract String getDescription();
-
-    protected final TelegramBot bot;
-    protected final LinkDaoInterface linkDao;
-
-    public abstract void handle(long id, String... args);
+    SendMessage handle(Update update);
 }
