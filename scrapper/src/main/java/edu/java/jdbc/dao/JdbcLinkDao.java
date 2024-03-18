@@ -3,6 +3,7 @@ package edu.java.jdbc.dao;
 import edu.java.jdbc.dto.LinkDto;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -12,6 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class JdbcLinkDao {
 
     private final JdbcTemplate jdbcTemplate;
+
+    final String id = "id";
+    final String uri = "uri";
+    final String lastUpdated = "last_updated";
 
     @Autowired
     public JdbcLinkDao(JdbcTemplate jdbcTemplate) {
@@ -25,17 +30,27 @@ public class JdbcLinkDao {
     }
 
     @Transactional
-    public void removeLink(Long linkId) {
-        String sql = "DELETE FROM links WHERE id = ?";
-        jdbcTemplate.update(sql, linkId);
+    public void removeLink(String url) {
+        String sql = "DELETE FROM links WHERE url = ?";
+        jdbcTemplate.update(sql, url);
+    }
+
+    @Transactional
+    public Optional<LinkDto> getLink(String url) {
+        String sql = "SELECT * FROM links WHERE url = ?";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> new LinkDto(
+            rs.getLong(id),
+            rs.getString(uri),
+            rs.getObject(lastUpdated, OffsetDateTime.class)
+        )).stream().findAny();
     }
 
     public List<LinkDto> findAllLinks() {
         String sql = "SELECT * FROM links";
         return jdbcTemplate.query(sql, (rs, rowNum) -> new LinkDto(
-            rs.getLong("id"),
-            rs.getString("url"),
-            rs.getObject("last_updated", OffsetDateTime.class)
+            rs.getLong(id),
+            rs.getString(uri),
+            rs.getObject(lastUpdated, OffsetDateTime.class)
         ));
     }
 }

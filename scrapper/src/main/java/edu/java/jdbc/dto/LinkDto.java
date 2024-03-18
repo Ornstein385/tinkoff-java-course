@@ -8,6 +8,9 @@ public class LinkDto {
     private OffsetDateTime lastUpdated;
 
     public LinkDto(Long id, String url, OffsetDateTime lastUpdated) {
+        this.id = id;
+        this.url = url;
+        this.lastUpdated = lastUpdated;
     }
 
     public Long getId() {
