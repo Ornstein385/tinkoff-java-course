@@ -31,6 +31,11 @@ public class JdbcLinkService implements LinkService {
     }
 
     @Override
+    public void add(long tgChatId) {
+        chatDao.addChat(new ChatDto(tgChatId, null));
+    }
+
+    @Override
     public void add(long tgChatId, URI url) {
         chatDao.addChat(new ChatDto(tgChatId, null));
         linkDao.addLink(new LinkDto(null, url.toString(), OffsetDateTime.now()));
@@ -38,6 +43,11 @@ public class JdbcLinkService implements LinkService {
             .orElseThrow(() -> new NoSuchElementException("не был найден URL при добавлении: " + url))
             .getId();
         linkChatDao.addLinkChat(new LinkChatDto(linkId, tgChatId, null));
+    }
+
+    @Override
+    public void remove(long tgChatId) {
+        chatDao.removeChat(tgChatId);
     }
 
     @Override
@@ -58,7 +68,7 @@ public class JdbcLinkService implements LinkService {
     }
 
     @Override
-    public Collection<URI> listSome(long tgChatId, long millisecondsBack, int limit) {
+    public Collection<URI> listAll(long tgChatId, long millisecondsBack, int limit) {
         List<LinkDto> list = linkChatDao.findAllLinksForChat(tgChatId, millisecondsBack, limit);
         if (list == null) {
             return Collections.emptyList();
