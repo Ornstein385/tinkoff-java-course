@@ -1,6 +1,6 @@
 package edu.java.client;
 
-import edu.java.dto.GitHubRepoResponse;
+import edu.java.dto.api.external.GitHubRepoResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;

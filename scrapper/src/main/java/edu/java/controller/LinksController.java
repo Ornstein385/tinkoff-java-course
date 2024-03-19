@@ -1,9 +1,15 @@
 package edu.java.controller;
 
-import edu.java.dto.api.request.AddLinkRequest;
-import edu.java.dto.api.request.RemoveLinkRequest;
-import edu.java.dto.api.response.LinkResponse;
-import edu.java.dto.api.response.ListLinksResponse;
+import edu.java.dto.api.internal.request.AddLinkRequest;
+import edu.java.dto.api.internal.request.RemoveLinkRequest;
+import edu.java.dto.api.internal.response.LinkResponse;
+import edu.java.dto.api.internal.response.ListLinksResponse;
+import edu.java.model.Link;
+import edu.java.service.LinkService;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +23,33 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/links")
 public class LinksController {
 
+    LinkService linkService;
+
+    @Autowired
+    public LinksController(@Qualifier("jdbcLinkService") LinkService linkService) {
+        this.linkService = linkService;
+    }
+
     @GetMapping
     public ResponseEntity<?> getAllLinks(@RequestHeader("Tg-Chat-Id") Long tgChatId) {
-        return ResponseEntity.ok(new ListLinksResponse());
+        List<Link> linkList = (List<Link>) linkService.listAllLinksForChat(tgChatId);
+
+        AtomicLong idGenerator = new AtomicLong(1);
+
+        List<LinkResponse> linkResponses = linkList.stream()
+            .map(link -> {
+                LinkResponse linkResponse = new LinkResponse();
+                linkResponse.setId(idGenerator.getAndIncrement());
+                linkResponse.setUrl(link.getUrl());
+                return linkResponse;
+            })
+            .toList();
+
+        ListLinksResponse listLinksResponse = new ListLinksResponse();
+        listLinksResponse.setLinks(linkResponses);
+        listLinksResponse.setSize(linkResponses.size());
+
+        return ResponseEntity.ok(listLinksResponse);
     }
 
     @PostMapping
@@ -27,7 +57,13 @@ public class LinksController {
         @RequestHeader("Tg-Chat-Id") Long tgChatId,
         @RequestBody AddLinkRequest addLinkRequest
     ) {
-        return ResponseEntity.ok(new LinkResponse());
+        linkService.add(tgChatId, addLinkRequest.getLink());
+
+        LinkResponse linkResponse = new LinkResponse();
+        linkResponse.setUrl(addLinkRequest.getLink());
+        linkResponse.setId(1L);
+
+        return ResponseEntity.ok(linkResponse);
     }
 
     @DeleteMapping
@@ -35,6 +71,8 @@ public class LinksController {
         @RequestHeader("Tg-Chat-Id") Long tgChatId,
         @RequestBody RemoveLinkRequest removeLinkRequest
     ) {
+        linkService.remove(tgChatId, removeLinkRequest.getLink());
+
         return ResponseEntity.ok("Ссылка успешно убрана");
     }
 }

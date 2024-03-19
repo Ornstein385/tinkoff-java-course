@@ -3,6 +3,8 @@ app:
     enable: true
     interval: 10000
     force-check-delay: 10000
+  database:
+    max-result-limit: 100
 
 spring:
   application:

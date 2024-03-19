@@ -1,10 +1,10 @@
-package edu.java.dto.api.request;
+package edu.java.dto.api.internal.request;
 
 import java.net.URI;
 import lombok.Data;
 
 @Data
-public class RemoveLinkRequest {
+public class AddLinkRequest {
     private URI link;
 }
 

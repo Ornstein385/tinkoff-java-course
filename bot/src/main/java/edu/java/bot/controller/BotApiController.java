@@ -2,6 +2,8 @@ package edu.java.bot.controller;
 
 import edu.java.bot.dto.api.request.LinkUpdateRequest;
 import edu.java.bot.dto.api.response.ApiErrorResponse;
+import edu.java.bot.telegram.Bot;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/updates")
 public class BotApiController {
+
+    Bot bot;
+
+    @Autowired
+    public BotApiController(Bot bot) {
+        this.bot = bot;
+    }
 
     @PostMapping
     public ResponseEntity<?> sendUpdate(@RequestBody LinkUpdateRequest linkUpdateRequest) {

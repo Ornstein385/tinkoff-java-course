@@ -1,6 +1,6 @@
 package edu.java.client;
 
-import edu.java.dto.StackOverflowQuestionResponse;
+import edu.java.dto.api.external.StackOverflowQuestionResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;

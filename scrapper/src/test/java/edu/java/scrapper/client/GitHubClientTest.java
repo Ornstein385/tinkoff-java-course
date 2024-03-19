@@ -3,7 +3,7 @@ package edu.java.scrapper.client;
 import edu.java.client.GitHubClient;
 import edu.java.client.GitHubClientImpl;
 import edu.java.configuration.ClientConfig;
-import edu.java.dto.GitHubRepoResponse;
+import edu.java.dto.api.external.GitHubRepoResponse;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
