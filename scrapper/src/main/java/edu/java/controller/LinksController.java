@@ -4,8 +4,8 @@ import edu.java.dto.api.internal.request.AddLinkRequest;
 import edu.java.dto.api.internal.request.RemoveLinkRequest;
 import edu.java.dto.api.internal.response.LinkResponse;
 import edu.java.dto.api.internal.response.ListLinksResponse;
+import edu.java.model.Link;
 import edu.java.service.LinkService;
-import java.net.URI;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +32,15 @@ public class LinksController {
 
     @GetMapping
     public ResponseEntity<?> getAllLinks(@RequestHeader("Tg-Chat-Id") Long tgChatId) {
-        List<URI> uriList = (List<URI>) linkService.listAll(tgChatId);
+        List<Link> linkList = (List<Link>) linkService.listAllLinksForChat(tgChatId);
 
         AtomicLong idGenerator = new AtomicLong(1);
 
-        List<LinkResponse> linkResponses = uriList.stream()
-            .map(uri -> {
+        List<LinkResponse> linkResponses = linkList.stream()
+            .map(link -> {
                 LinkResponse linkResponse = new LinkResponse();
                 linkResponse.setId(idGenerator.getAndIncrement());
-                linkResponse.setUrl(uri);
+                linkResponse.setUrl(link.getUrl());
                 return linkResponse;
             })
             .toList();

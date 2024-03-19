@@ -15,7 +15,7 @@ public class JdbcLinkDao {
     private final JdbcTemplate jdbcTemplate;
 
     final String id = "id";
-    final String uri = "uri";
+    final String url = "url";
     final String lastUpdated = "last_updated";
 
     @Autowired
@@ -40,17 +40,39 @@ public class JdbcLinkDao {
         String sql = "SELECT * FROM links WHERE url = ?";
         return jdbcTemplate.query(sql, (rs, rowNum) -> new LinkDto(
             rs.getLong(id),
-            rs.getString(uri),
+            rs.getString(this.url),
             rs.getObject(lastUpdated, OffsetDateTime.class)
         )).stream().findAny();
     }
 
+    @Transactional
     public List<LinkDto> findAllLinks() {
         String sql = "SELECT * FROM links";
         return jdbcTemplate.query(sql, (rs, rowNum) -> new LinkDto(
             rs.getLong(id),
-            rs.getString(uri),
+            rs.getString(url),
             rs.getObject(lastUpdated, OffsetDateTime.class)
         ));
+    }
+
+    @Transactional
+    public List<LinkDto> findAllLinks(long millisecondsBack, int limit) {
+        String sql = """
+            SELECT * FROM links
+            WHERE last_updated <= NOW() - INTERVAL '? milliseconds'
+            ORDER BY last_updated ASC
+            LIMIT ?
+            """;
+        return jdbcTemplate.query(sql, new Object[] {millisecondsBack, limit}, (rs, rowNum) -> new LinkDto(
+            rs.getLong(id),
+            rs.getString(url),
+            rs.getObject(lastUpdated, OffsetDateTime.class)
+        ));
+    }
+
+    @Transactional
+    public void updateLinkLastUpdatedTime(String url) {
+        String sql = "UPDATE links SET last_updated = CURRENT_TIMESTAMP WHERE url = ?";
+        jdbcTemplate.update(sql, url);
     }
 }

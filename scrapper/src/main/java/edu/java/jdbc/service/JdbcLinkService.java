@@ -6,6 +6,7 @@ import edu.java.jdbc.dao.JdbcLinkDao;
 import edu.java.jdbc.dto.ChatDto;
 import edu.java.jdbc.dto.LinkChatDto;
 import edu.java.jdbc.dto.LinkDto;
+import edu.java.model.Link;
 import edu.java.service.LinkService;
 import java.net.URI;
 import java.time.OffsetDateTime;
@@ -59,20 +60,81 @@ public class JdbcLinkService implements LinkService {
     }
 
     @Override
-    public Collection<URI> listAll(long tgChatId) {
+    public Collection<Link> listAllLinksForChat(long tgChatId) {
         List<LinkDto> list = linkChatDao.findAllLinksForChat(tgChatId);
         if (list == null) {
             return Collections.emptyList();
         }
-        return list.stream().map((x) -> URI.create(x.getUrl())).collect(Collectors.toList());
+        return list.stream().map(dto -> {
+            Link link = new Link();
+            link.setUrl(URI.create(dto.getUrl()));
+            link.setLastUpdated(dto.getLastUpdated());
+            return link;
+        }).collect(Collectors.toList());
     }
 
     @Override
-    public Collection<URI> listAll(long tgChatId, long millisecondsBack, int limit) {
+    public Collection<Link> listAllLinksForChat(long tgChatId, long millisecondsBack, int limit) {
         List<LinkDto> list = linkChatDao.findAllLinksForChat(tgChatId, millisecondsBack, limit);
         if (list == null) {
             return Collections.emptyList();
         }
-        return list.stream().map((x) -> URI.create(x.getUrl())).collect(Collectors.toList());
+        return list.stream().map(dto -> {
+            Link link = new Link();
+            link.setUrl(URI.create(dto.getUrl()));
+            link.setLastUpdated(dto.getLastUpdated());
+            return link;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<Link> listAllLinks() {
+        List<LinkDto> list = linkDao.findAllLinks();
+        if (list == null) {
+            return Collections.emptyList();
+        }
+        return list.stream().map(dto -> {
+            Link link = new Link();
+            link.setUrl(URI.create(dto.getUrl()));
+            link.setLastUpdated(dto.getLastUpdated());
+            return link;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<Link> listAllLinks(long millisecondsBack, int limit) {
+        List<LinkDto> list = linkDao.findAllLinks(millisecondsBack, limit);
+        if (list == null) {
+            return Collections.emptyList();
+        }
+        return list.stream().map(dto -> {
+            Link link = new Link();
+            link.setUrl(URI.create(dto.getUrl()));
+            link.setLastUpdated(dto.getLastUpdated());
+            return link;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<Long> listAllChatsForLink(URI url) {
+        List<ChatDto> list = linkChatDao.findAllChatsForLink(url);
+        if (list == null) {
+            return Collections.emptyList();
+        }
+        return list.stream().map(ChatDto::getId).collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<Long> listAllChatsForLink(URI url, long millisecondsBack, int limit) {
+        List<ChatDto> list = linkChatDao.findAllChatsForLink(url, millisecondsBack, limit);
+        if (list == null) {
+            return Collections.emptyList();
+        }
+        return list.stream().map(ChatDto::getId).collect(Collectors.toList());
+    }
+
+    @Override
+    public void refreshLinkUpdateTime(URI url) {
+        linkDao.updateLinkLastUpdatedTime(url.toString());
     }
 }

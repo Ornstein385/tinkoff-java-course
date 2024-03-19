@@ -33,6 +33,7 @@ public class JdbcChatDao {
         jdbcTemplate.update(sql, chatId);
     }
 
+    @Transactional
     public List<ChatDto> findAllChats() {
         String sql = "SELECT * FROM chats";
         return jdbcTemplate.query(sql, (rs, rowNum) -> new ChatDto(
