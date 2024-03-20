@@ -17,6 +17,7 @@ import liquibase.exception.LiquibaseException;
 import liquibase.resource.DirectoryResourceAccessor;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
@@ -55,6 +56,13 @@ public abstract class IntegrationTest {
     @AfterAll
     static void stop() {
         postgres.stop();
+    }
+
+    @AfterEach
+    public void cleanUp() {
+        jdbcTemplate.update("DELETE FROM link_chat");
+        jdbcTemplate.update("DELETE FROM links");
+        jdbcTemplate.update("DELETE FROM chats");
     }
 
     private static void runMigrations(JdbcDatabaseContainer<?> c) {
