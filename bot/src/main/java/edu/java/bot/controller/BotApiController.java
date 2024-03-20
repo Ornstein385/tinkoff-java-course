@@ -25,6 +25,11 @@ public class BotApiController {
     @PostMapping
     public ResponseEntity<?> sendUpdate(@RequestBody LinkUpdateRequest linkUpdateRequest) {
         try {
+            bot.sendUpdate(
+                linkUpdateRequest.getUrl(),
+                linkUpdateRequest.getTgChatIds(),
+                linkUpdateRequest.getDescription()
+            );
             return ResponseEntity.ok().body("Обновление обработано");
         } catch (Exception e) {
             ApiErrorResponse errorResponse = new ApiErrorResponse();

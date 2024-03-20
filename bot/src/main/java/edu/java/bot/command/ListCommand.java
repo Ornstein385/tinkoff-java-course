@@ -1,17 +1,21 @@
 package edu.java.bot.command;
 
-import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import edu.java.bot.dao.LinkDaoInterface;
 import edu.java.bot.model.Link;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ListCommand extends Command {
+public class ListCommand implements Command {
 
-    public ListCommand(TelegramBot bot, LinkDaoInterface linkDao) {
-        super(bot, linkDao);
+    @Autowired
+    public void setLinkDao(LinkDaoInterface linkDao) {
+        this.linkDao = linkDao;
     }
+
+    public LinkDaoInterface linkDao;
 
     @Override
     public String getCommand() {
@@ -24,10 +28,10 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void handle(long id, String[] args) {
+    public SendMessage handle(Update update) {
+        long id = update.message().from().id();
         if (linkDao.getSize(id) == 0) {
-            bot.execute(new SendMessage(id, "нет отслеживаемых ссылок"));
-            return;
+            return new SendMessage(id, "нет отслеживаемых ссылок");
         }
 
         StringBuilder sb = new StringBuilder();
@@ -37,6 +41,6 @@ public class ListCommand extends Command {
             sb.append(link.getUrl()).append("\n\n");
             i++;
         }
-        bot.execute(new SendMessage(id, sb.toString()));
+        return new SendMessage(id, sb.toString());
     }
 }

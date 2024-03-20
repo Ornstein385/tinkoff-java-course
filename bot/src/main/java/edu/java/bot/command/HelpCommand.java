@@ -1,26 +1,20 @@
 package edu.java.bot.command;
 
-import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import edu.java.bot.dao.LinkDaoInterface;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HelpCommand extends Command {
+public class HelpCommand implements Command {
 
-    public HelpCommand(TelegramBot bot, LinkDaoInterface linkDao) {
-        super(bot, linkDao);
-    }
+    private List<Command> commands;
 
     @Autowired
-    @Lazy
-    public void setCommandKeeper(CommandKeeper commandKeeper) {
-        this.commandKeeper = commandKeeper;
+    public void setCommands(List<Command> commands) {
+        this.commands = commands;
     }
-
-    public CommandKeeper commandKeeper;
 
     @Override
     public String getCommand() {
@@ -33,11 +27,11 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void handle(long id, String[] args) {
+    public SendMessage handle(Update update) {
         StringBuilder sb = new StringBuilder();
-        for (Command command : commandKeeper.getAll()) {
+        for (Command command : commands) {
             sb.append(command.getCommand()).append(" -> ").append(command.getDescription()).append("\n");
         }
-        bot.execute(new SendMessage(id, sb.toString()));
+        return new SendMessage(update.message().from().id(), sb.toString());
     }
 }

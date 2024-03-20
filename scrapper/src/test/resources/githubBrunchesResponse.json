@@ -1,0 +1,50 @@
+[
+    {
+        "name": "hw1",
+        "commit": {
+            "sha": "fb3b900ee2e22ca023d8659886c14a647f348eb4",
+            "url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/commits/fb3b900ee2e22ca023d8659886c14a647f348eb4"
+        },
+        "protected": false
+    },
+    {
+        "name": "hw2",
+        "commit": {
+            "sha": "90cee038caa8bb7bfcf0cd7f8dd6da8f1d81139e",
+            "url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/commits/90cee038caa8bb7bfcf0cd7f8dd6da8f1d81139e"
+        },
+        "protected": false
+    },
+    {
+        "name": "hw3",
+        "commit": {
+            "sha": "f5b06b127eb2c3181005f4d267c39e69f4a28759",
+            "url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/commits/f5b06b127eb2c3181005f4d267c39e69f4a28759"
+        },
+        "protected": false
+    },
+    {
+        "name": "hw4",
+        "commit": {
+            "sha": "a99f30a7e3c5a2f24cf92124606d15d47d91feb8",
+            "url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/commits/a99f30a7e3c5a2f24cf92124606d15d47d91feb8"
+        },
+        "protected": false
+    },
+    {
+        "name": "hw5",
+        "commit": {
+            "sha": "0c66d196c122c70e5b837af4370ab85f9163fc71",
+            "url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/commits/0c66d196c122c70e5b837af4370ab85f9163fc71"
+        },
+        "protected": false
+    },
+    {
+        "name": "master",
+        "commit": {
+            "sha": "ee1a419c6c0307ed477ed51311cd9e33fd960a06",
+            "url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/commits/ee1a419c6c0307ed477ed51311cd9e33fd960a06"
+        },
+        "protected": false
+    }
+]

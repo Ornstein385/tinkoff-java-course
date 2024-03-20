@@ -7,7 +7,8 @@ import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SetMyCommands;
 import edu.java.bot.command.CommandKeeper;
 import edu.java.bot.configuration.ApplicationConfig;
-import edu.java.bot.dao.LinkDaoInterface;
+import java.net.URI;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,19 +17,11 @@ public class Bot {
 
     private final TelegramBot bot;
     private final ApplicationConfig config;
-    private final LinkDaoInterface linkDao;
     private final CommandKeeper commandKeeper;
 
-    private static final String START = "/start";
-    private static final String HELP = "/help";
-    private static final String TRACK = "/track";
-    private static final String UNTRACK = "/untrack";
-    private static final String LIST = "/list";
-
     @Autowired
-    public Bot(ApplicationConfig config, LinkDaoInterface linkDao, TelegramBot bot, CommandKeeper commandKeeper) {
+    public Bot(ApplicationConfig config, TelegramBot bot, CommandKeeper commandKeeper) {
         this.config = config;
-        this.linkDao = linkDao;
         this.bot = bot;
         this.commandKeeper = commandKeeper;
         setUpBot();
@@ -49,36 +42,27 @@ public class Bot {
     public void handleUpdate(Update update) {
         String text = update.message().text();
         long id = update.message().from().id();
-
         if (text.startsWith("/")) {
-            executeCommand(id, text);
+            executeCommand(update);
         } else {
             bot.execute(new SendMessage(id, "нужно использовать одну из существующих команд"));
         }
     }
 
-    private void executeCommand(Long chatId, String message) {
-        String[] parts = message.split(" ");
+    private void executeCommand(Update update) {
+        String[] parts = update.message().text().split(" ");
 
-        switch (parts[0]) {
-            case START:
-                commandKeeper.get(START).handle(chatId);
-                break;
-            case HELP:
-                commandKeeper.get(HELP).handle(chatId);
-                break;
-            case TRACK:
-                commandKeeper.get(TRACK).handle(chatId, parts.length > 1 ? parts[1] : "");
-                break;
-            case UNTRACK:
-                commandKeeper.get(UNTRACK).handle(chatId, parts.length > 1 ? parts[1] : "");
-                break;
-            case LIST:
-                commandKeeper.get(LIST).handle(chatId);
-                break;
-            default:
-                bot.execute(new SendMessage(chatId, "команда не существует"));
-                break;
+        if (commandKeeper.get(parts[0]) != null) {
+            bot.execute(commandKeeper.get(parts[0]).handle(update));
+        } else {
+            bot.execute(new SendMessage(update.message().from().id(), "команда не существует"));
+        }
+    }
+
+    public void sendUpdate(URI url, List<Long> tgChatIds, String linkType) {
+        String message = LinkTypeMessageMapper.getMessage(linkType) + url.toString();
+        for (Long id : tgChatIds) {
+            bot.execute(new SendMessage(id, message));
         }
     }
 }

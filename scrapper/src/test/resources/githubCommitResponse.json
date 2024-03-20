@@ -1,0 +1,206 @@
+{
+    "sha": "0c66d196c122c70e5b837af4370ab85f9163fc71",
+    "node_id": "C_kwDOLOB_RtoAKDBjNjZkMTk2YzEyMmM3MGU1YjgzN2FmNDM3MGFiODVmOTE2M2ZjNzE",
+    "commit": {
+        "author": {
+            "name": "Ornstein385",
+            "email": "valerfom2022@yandex.ru",
+            "date": "2024-03-18T14:34:39Z"
+        },
+        "committer": {
+            "name": "Ornstein385",
+            "email": "valerfom2022@yandex.ru",
+            "date": "2024-03-18T14:34:39Z"
+        },
+        "message": "tests\nservice\nupdated dao",
+        "tree": {
+            "sha": "b9bb84e5eb422ed2554eeb9783e6acdfd42e7a43",
+            "url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/git/trees/b9bb84e5eb422ed2554eeb9783e6acdfd42e7a43"
+        },
+        "url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/git/commits/0c66d196c122c70e5b837af4370ab85f9163fc71",
+        "comment_count": 0,
+        "verification": {
+            "verified": false,
+            "reason": "unsigned",
+            "signature": null,
+            "payload": null
+        }
+    },
+    "url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/commits/0c66d196c122c70e5b837af4370ab85f9163fc71",
+    "html_url": "https://github.com/Ornstein385/tinkoff-java-course/commit/0c66d196c122c70e5b837af4370ab85f9163fc71",
+    "comments_url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/commits/0c66d196c122c70e5b837af4370ab85f9163fc71/comments",
+    "author": {
+        "login": "strazhnick",
+        "id": 114961766,
+        "node_id": "U_kgDOBtotZg",
+        "avatar_url": "https://avatars.githubusercontent.com/u/114961766?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/strazhnick",
+        "html_url": "https://github.com/strazhnick",
+        "followers_url": "https://api.github.com/users/strazhnick/followers",
+        "following_url": "https://api.github.com/users/strazhnick/following{/other_user}",
+        "gists_url": "https://api.github.com/users/strazhnick/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/strazhnick/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/strazhnick/subscriptions",
+        "organizations_url": "https://api.github.com/users/strazhnick/orgs",
+        "repos_url": "https://api.github.com/users/strazhnick/repos",
+        "events_url": "https://api.github.com/users/strazhnick/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/strazhnick/received_events",
+        "type": "User",
+        "site_admin": false
+    },
+    "committer": {
+        "login": "strazhnick",
+        "id": 114961766,
+        "node_id": "U_kgDOBtotZg",
+        "avatar_url": "https://avatars.githubusercontent.com/u/114961766?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/strazhnick",
+        "html_url": "https://github.com/strazhnick",
+        "followers_url": "https://api.github.com/users/strazhnick/followers",
+        "following_url": "https://api.github.com/users/strazhnick/following{/other_user}",
+        "gists_url": "https://api.github.com/users/strazhnick/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/strazhnick/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/strazhnick/subscriptions",
+        "organizations_url": "https://api.github.com/users/strazhnick/orgs",
+        "repos_url": "https://api.github.com/users/strazhnick/repos",
+        "events_url": "https://api.github.com/users/strazhnick/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/strazhnick/received_events",
+        "type": "User",
+        "site_admin": false
+    },
+    "parents": [
+        {
+            "sha": "b5730b9cae713b4ddff242885a38d0aafac2ca0a",
+            "url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/commits/b5730b9cae713b4ddff242885a38d0aafac2ca0a",
+            "html_url": "https://github.com/Ornstein385/tinkoff-java-course/commit/b5730b9cae713b4ddff242885a38d0aafac2ca0a"
+        }
+    ],
+    "stats": {
+        "total": 273,
+        "additions": 251,
+        "deletions": 22
+    },
+    "files": [
+        {
+            "sha": "39531cf834323af993a05f31a608d22d291e6b4a",
+            "filename": "scrapper/src/main/java/edu/java/jdbc/dao/JdbcChatDao.java",
+            "status": "modified",
+            "additions": 7,
+            "deletions": 4,
+            "changes": 11,
+            "blob_url": "https://github.com/Ornstein385/tinkoff-java-course/blob/0c66d196c122c70e5b837af4370ab85f9163fc71/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fjdbc%2Fdao%2FJdbcChatDao.java",
+            "raw_url": "https://github.com/Ornstein385/tinkoff-java-course/raw/0c66d196c122c70e5b837af4370ab85f9163fc71/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fjdbc%2Fdao%2FJdbcChatDao.java",
+            "contents_url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/contents/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fjdbc%2Fdao%2FJdbcChatDao.java?ref=0c66d196c122c70e5b837af4370ab85f9163fc71",
+            "patch": "@@ -13,15 +13,18 @@ public class JdbcChatDao {\n \n     private final JdbcTemplate jdbcTemplate;\n \n+    final String id = \"id\";\n+    final String createdAt = \"created_at\";\n+\n     @Autowired\n     public JdbcChatDao(JdbcTemplate jdbcTemplate) {\n         this.jdbcTemplate = jdbcTemplate;\n     }\n \n     @Transactional\n     public void addChat(ChatDto chatDTO) {\n-        String sql = \"INSERT INTO chats (id, created_at) VALUES (?, ?)\";\n-        jdbcTemplate.update(sql, chatDTO.getId(), chatDTO.getCreatedAt());\n+        String sql = \"INSERT INTO chats (id) VALUES (?)\";\n+        jdbcTemplate.update(sql, chatDTO.getId());\n     }\n \n     @Transactional\n@@ -33,8 +36,8 @@ public void removeChat(Long chatId) {\n     public List<ChatDto> findAllChats() {\n         String sql = \"SELECT * FROM chats\";\n         return jdbcTemplate.query(sql, (rs, rowNum) -> new ChatDto(\n-            rs.getLong(\"id\"),\n-            rs.getObject(\"created_at\", OffsetDateTime.class)\n+            rs.getLong(id),\n+            rs.getObject(createdAt, OffsetDateTime.class)\n         ));\n     }\n }"
+        },
+        {
+            "sha": "f715109a531f561249ec868acba740841477038b",
+            "filename": "scrapper/src/main/java/edu/java/jdbc/dao/JdbcLinkChatDao.java",
+            "status": "modified",
+            "additions": 63,
+            "deletions": 4,
+            "changes": 67,
+            "blob_url": "https://github.com/Ornstein385/tinkoff-java-course/blob/0c66d196c122c70e5b837af4370ab85f9163fc71/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fjdbc%2Fdao%2FJdbcLinkChatDao.java",
+            "raw_url": "https://github.com/Ornstein385/tinkoff-java-course/raw/0c66d196c122c70e5b837af4370ab85f9163fc71/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fjdbc%2Fdao%2FJdbcLinkChatDao.java",
+            "contents_url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/contents/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fjdbc%2Fdao%2FJdbcLinkChatDao.java?ref=0c66d196c122c70e5b837af4370ab85f9163fc71",
+            "patch": "@@ -1,6 +1,8 @@\n package edu.java.jdbc.dao;\n \n+import edu.java.jdbc.dto.ChatDto;\n import edu.java.jdbc.dto.LinkChatDto;\n+import edu.java.jdbc.dto.LinkDto;\n import java.time.OffsetDateTime;\n import java.util.List;\n import org.springframework.beans.factory.annotation.Autowired;\n@@ -13,29 +15,86 @@ public class JdbcLinkChatDao {\n \n     private final JdbcTemplate jdbcTemplate;\n \n+    final String id = \"id\";\n+    final String uri = \"uri\";\n+    final String lastUpdated = \"last_updated\";\n+    final String createdAt = \"created_at\";\n+\n     @Autowired\n     public JdbcLinkChatDao(JdbcTemplate jdbcTemplate) {\n         this.jdbcTemplate = jdbcTemplate;\n     }\n \n     @Transactional\n     public void addLinkChat(LinkChatDto linkChatDto) {\n-        String sql = \"INSERT INTO link_chat (link_id, chat_id, added_at) VALUES (?, ?, ?)\";\n-        jdbcTemplate.update(sql, linkChatDto.getLinkId(), linkChatDto.getChatId(), linkChatDto.getAddedAt());\n+        String sql = \"\"\"\n+                     INSERT INTO link_chat (link_id, chat_id)\n+                     VALUES (?, ?)\n+                     \"\"\";\n+        jdbcTemplate.update(sql, linkChatDto.getLinkId(), linkChatDto.getChatId());\n     }\n \n     @Transactional\n     public void removeLinkChat(Long linkId, Long chatId) {\n-        String sql = \"DELETE FROM link_chat WHERE link_id = ? AND chat_id = ?\";\n+        String sql = \"\"\"\n+                     DELETE FROM link_chat\n+                     WHERE link_id = ? AND chat_id = ?\n+                     \"\"\";\n         jdbcTemplate.update(sql, linkId, chatId);\n     }\n \n     public List<LinkChatDto> findAllLinkChats() {\n-        String sql = \"SELECT * FROM link_chat\";\n+        String sql = \"\"\"\n+                     SELECT *\n+                     FROM link_chat\n+                     \"\"\";\n         return jdbcTemplate.query(sql, (rs, rowNum) -> new LinkChatDto(\n             rs.getLong(\"link_id\"),\n             rs.getLong(\"chat_id\"),\n             rs.getObject(\"added_at\", OffsetDateTime.class)\n         ));\n     }\n+\n+    public List<LinkDto> findAllLinksForChat(Long chatId) {\n+        String sql = \"\"\"\n+                     SELECT l.id, l.url, l.last_updated\n+                     FROM link_chat lc\n+                     JOIN links l ON lc.link_id = l.id\n+                     WHERE lc.chat_id = ?\n+                     \"\"\";\n+        return jdbcTemplate.query(sql, new Object[]{chatId}, (rs, rowNum) -> new LinkDto(\n+            rs.getLong(id),\n+            rs.getString(uri),\n+            rs.getObject(lastUpdated, OffsetDateTime.class)\n+        ));\n+    }\n+\n+    public List<LinkDto> findAllLinksForChat(Long chatId, long millisecondsBack, int limit) {\n+        String sql = \"\"\"\n+                     SELECT l.id, l.url, l.last_updated\n+                     FROM link_chat lc\n+                     JOIN links l ON lc.link_id = l.id\n+                     WHERE lc.chat_id = ? AND l.last_updated <= NOW() - INTERVAL '? milliseconds'\n+                     ORDER BY l.last_updated ASC\n+                     LIMIT ?\n+                     \"\"\";\n+        return jdbcTemplate.query(sql, new Object[]{chatId, millisecondsBack, limit}, (rs, rowNum) -> new LinkDto(\n+            rs.getLong(id),\n+            rs.getString(uri),\n+            rs.getObject(lastUpdated, OffsetDateTime.class)\n+        ));\n+    }\n+\n+    public List<ChatDto> findAllChatsForLink(Long linkId) {\n+        String sql = \"\"\"\n+                     SELECT c.id, c.created_at\n+                     FROM link_chat lc\n+                     JOIN chats c ON lc.chat_id = c.id\n+                     WHERE lc.link_id = ?\n+                     \"\"\";\n+        return jdbcTemplate.query(sql, new Object[]{linkId}, (rs, rowNum) -> new ChatDto(\n+            rs.getLong(id),\n+            rs.getObject(createdAt, OffsetDateTime.class)\n+        ));\n+    }\n }"
+        },
+        {
+            "sha": "f477224424692d7ab040edcfd1a46b5934cf4b78",
+            "filename": "scrapper/src/main/java/edu/java/jdbc/dao/JdbcLinkDao.java",
+            "status": "modified",
+            "additions": 21,
+            "deletions": 6,
+            "changes": 27,
+            "blob_url": "https://github.com/Ornstein385/tinkoff-java-course/blob/0c66d196c122c70e5b837af4370ab85f9163fc71/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fjdbc%2Fdao%2FJdbcLinkDao.java",
+            "raw_url": "https://github.com/Ornstein385/tinkoff-java-course/raw/0c66d196c122c70e5b837af4370ab85f9163fc71/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fjdbc%2Fdao%2FJdbcLinkDao.java",
+            "contents_url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/contents/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fjdbc%2Fdao%2FJdbcLinkDao.java?ref=0c66d196c122c70e5b837af4370ab85f9163fc71",
+            "patch": "@@ -3,6 +3,7 @@\n import edu.java.jdbc.dto.LinkDto;\n import java.time.OffsetDateTime;\n import java.util.List;\n+import java.util.Optional;\n import org.springframework.beans.factory.annotation.Autowired;\n import org.springframework.jdbc.core.JdbcTemplate;\n import org.springframework.stereotype.Repository;\n@@ -13,6 +14,10 @@ public class JdbcLinkDao {\n \n     private final JdbcTemplate jdbcTemplate;\n \n+    final String id = \"id\";\n+    final String uri = \"uri\";\n+    final String lastUpdated = \"last_updated\";\n+\n     @Autowired\n     public JdbcLinkDao(JdbcTemplate jdbcTemplate) {\n         this.jdbcTemplate = jdbcTemplate;\n@@ -25,17 +30,27 @@ public void addLink(LinkDto linkDTO) {\n     }\n \n     @Transactional\n-    public void removeLink(Long linkId) {\n-        String sql = \"DELETE FROM links WHERE id = ?\";\n-        jdbcTemplate.update(sql, linkId);\n+    public void removeLink(String url) {\n+        String sql = \"DELETE FROM links WHERE url = ?\";\n+        jdbcTemplate.update(sql, url);\n+    }\n+\n+    @Transactional\n+    public Optional<LinkDto> getLink(String url) {\n+        String sql = \"SELECT * FROM links WHERE url = ?\";\n+        return jdbcTemplate.query(sql, (rs, rowNum) -> new LinkDto(\n+            rs.getLong(id),\n+            rs.getString(uri),\n+            rs.getObject(lastUpdated, OffsetDateTime.class)\n+        )).stream().findAny();\n     }\n \n     public List<LinkDto> findAllLinks() {\n         String sql = \"SELECT * FROM links\";\n         return jdbcTemplate.query(sql, (rs, rowNum) -> new LinkDto(\n-            rs.getLong(\"id\"),\n-            rs.getString(\"url\"),\n-            rs.getObject(\"last_updated\", OffsetDateTime.class)\n+            rs.getLong(id),\n+            rs.getString(uri),\n+            rs.getObject(lastUpdated, OffsetDateTime.class)\n         ));\n     }\n }"
+        },
+        {
+            "sha": "8abaaf60e2be76f5af421a0c5d745b76da4a0bfc",
+            "filename": "scrapper/src/main/java/edu/java/jdbc/dto/LinkDto.java",
+            "status": "modified",
+            "additions": 3,
+            "deletions": 0,
+            "changes": 3,
+            "blob_url": "https://github.com/Ornstein385/tinkoff-java-course/blob/0c66d196c122c70e5b837af4370ab85f9163fc71/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fjdbc%2Fdto%2FLinkDto.java",
+            "raw_url": "https://github.com/Ornstein385/tinkoff-java-course/raw/0c66d196c122c70e5b837af4370ab85f9163fc71/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fjdbc%2Fdto%2FLinkDto.java",
+            "contents_url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/contents/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fjdbc%2Fdto%2FLinkDto.java?ref=0c66d196c122c70e5b837af4370ab85f9163fc71",
+            "patch": "@@ -8,6 +8,9 @@ public class LinkDto {\n     private OffsetDateTime lastUpdated;\n \n     public LinkDto(Long id, String url, OffsetDateTime lastUpdated) {\n+        this.id = id;\n+        this.url = url;\n+        this.lastUpdated = lastUpdated;\n     }\n \n     public Long getId() {"
+        },
+        {
+            "sha": "b369d350389962d976aafe2d3164eeec854f50c3",
+            "filename": "scrapper/src/main/java/edu/java/jdbc/service/JdbcLinkService.java",
+            "status": "added",
+            "additions": 68,
+            "deletions": 0,
+            "changes": 68,
+            "blob_url": "https://github.com/Ornstein385/tinkoff-java-course/blob/0c66d196c122c70e5b837af4370ab85f9163fc71/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fjdbc%2Fservice%2FJdbcLinkService.java",
+            "raw_url": "https://github.com/Ornstein385/tinkoff-java-course/raw/0c66d196c122c70e5b837af4370ab85f9163fc71/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fjdbc%2Fservice%2FJdbcLinkService.java",
+            "contents_url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/contents/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fjdbc%2Fservice%2FJdbcLinkService.java?ref=0c66d196c122c70e5b837af4370ab85f9163fc71",
+            "patch": "@@ -0,0 +1,68 @@\n+package edu.java.jdbc.service;\n+\n+import edu.java.jdbc.dao.JdbcChatDao;\n+import edu.java.jdbc.dao.JdbcLinkChatDao;\n+import edu.java.jdbc.dao.JdbcLinkDao;\n+import edu.java.jdbc.dto.ChatDto;\n+import edu.java.jdbc.dto.LinkChatDto;\n+import edu.java.jdbc.dto.LinkDto;\n+import edu.java.service.LinkService;\n+import java.net.URI;\n+import java.time.OffsetDateTime;\n+import java.util.Collection;\n+import java.util.Collections;\n+import java.util.List;\n+import java.util.NoSuchElementException;\n+import java.util.stream.Collectors;\n+import org.springframework.beans.factory.annotation.Autowired;\n+import org.springframework.stereotype.Service;\n+\n+@Service\n+public class JdbcLinkService implements LinkService {\n+    JdbcLinkDao linkDao;\n+    JdbcChatDao chatDao;\n+    JdbcLinkChatDao linkChatDao;\n+\n+    @Autowired\n+    public JdbcLinkService(JdbcLinkDao linkDao, JdbcChatDao chatDao, JdbcLinkChatDao linkChatDao) {\n+        this.linkDao = linkDao;\n+        this.chatDao = chatDao;\n+        this.linkChatDao = linkChatDao;\n+    }\n+\n+    @Override\n+    public void add(long tgChatId, URI url) {\n+        chatDao.addChat(new ChatDto(tgChatId, null));\n+        linkDao.addLink(new LinkDto(null, url.toString(), OffsetDateTime.now()));\n+        Long linkId = linkDao.getLink(url.toString())\n+            .orElseThrow(() -> new NoSuchElementException(\"не был найден URL при добавлении: \" + url))\n+            .getId();\n+        linkChatDao.addLinkChat(new LinkChatDto(linkId, tgChatId, null));\n+    }\n+\n+    @Override\n+    public void remove(long tgChatId, URI url) {\n+        Long linkId = linkDao.getLink(url.toString())\n+            .orElseThrow(() -> new NoSuchElementException(\"не был найден URL при удалении: \" + url))\n+            .getId();\n+        linkChatDao.removeLinkChat(linkId, tgChatId);\n+    }\n+\n+    @Override\n+    public Collection<URI> listAll(long tgChatId) {\n+        List<LinkDto> list = linkChatDao.findAllLinksForChat(tgChatId);\n+        if (list == null) {\n+            return Collections.emptyList();\n+        }\n+        return list.stream().map((x) -> URI.create(x.getUrl())).collect(Collectors.toList());\n+    }\n+\n+    @Override\n+    public Collection<URI> listSome(long tgChatId, long millisecondsBack, int limit) {\n+        List<LinkDto> list = linkChatDao.findAllLinksForChat(tgChatId, millisecondsBack, limit);\n+        if (list == null) {\n+            return Collections.emptyList();\n+        }\n+        return list.stream().map((x) -> URI.create(x.getUrl())).collect(Collectors.toList());\n+    }\n+}"
+        },
+        {
+            "sha": "81a2993e1409c61eeae693eabf3177ea242ef5ad",
+            "filename": "scrapper/src/main/java/edu/java/service/GitHubService.java",
+            "status": "removed",
+            "additions": 0,
+            "deletions": 4,
+            "changes": 4,
+            "blob_url": "https://github.com/Ornstein385/tinkoff-java-course/blob/b5730b9cae713b4ddff242885a38d0aafac2ca0a/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fservice%2FGitHubService.java",
+            "raw_url": "https://github.com/Ornstein385/tinkoff-java-course/raw/b5730b9cae713b4ddff242885a38d0aafac2ca0a/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fservice%2FGitHubService.java",
+            "contents_url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/contents/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fservice%2FGitHubService.java?ref=b5730b9cae713b4ddff242885a38d0aafac2ca0a",
+            "patch": "@@ -1,4 +0,0 @@\n-package edu.java.service;\n-\n-public class GitHubService {\n-}"
+        },
+        {
+            "sha": "85cb7939861de36f113968b7510b42a76b5f981c",
+            "filename": "scrapper/src/main/java/edu/java/service/LinkService.java",
+            "status": "added",
+            "additions": 14,
+            "deletions": 0,
+            "changes": 14,
+            "blob_url": "https://github.com/Ornstein385/tinkoff-java-course/blob/0c66d196c122c70e5b837af4370ab85f9163fc71/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fservice%2FLinkService.java",
+            "raw_url": "https://github.com/Ornstein385/tinkoff-java-course/raw/0c66d196c122c70e5b837af4370ab85f9163fc71/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fservice%2FLinkService.java",
+            "contents_url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/contents/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fservice%2FLinkService.java?ref=0c66d196c122c70e5b837af4370ab85f9163fc71",
+            "patch": "@@ -0,0 +1,14 @@\n+package edu.java.service;\n+\n+import java.net.URI;\n+import java.util.Collection;\n+\n+public interface LinkService {\n+    void add(long tgChatId, URI url);\n+\n+    void remove(long tgChatId, URI url);\n+\n+    Collection<URI> listAll(long tgChatId);\n+\n+    Collection<URI> listSome(long tgChatId, long millisecondsBack, int limit);\n+}"
+        },
+        {
+            "sha": "29fe19c2d019f1d3f6f07f981b71d546b6b57c3b",
+            "filename": "scrapper/src/main/java/edu/java/service/StackOverflowService.java",
+            "status": "removed",
+            "additions": 0,
+            "deletions": 4,
+            "changes": 4,
+            "blob_url": "https://github.com/Ornstein385/tinkoff-java-course/blob/b5730b9cae713b4ddff242885a38d0aafac2ca0a/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fservice%2FStackOverflowService.java",
+            "raw_url": "https://github.com/Ornstein385/tinkoff-java-course/raw/b5730b9cae713b4ddff242885a38d0aafac2ca0a/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fservice%2FStackOverflowService.java",
+            "contents_url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/contents/scrapper%2Fsrc%2Fmain%2Fjava%2Fedu%2Fjava%2Fservice%2FStackOverflowService.java?ref=b5730b9cae713b4ddff242885a38d0aafac2ca0a",
+            "patch": "@@ -1,4 +0,0 @@\n-package edu.java.service;\n-\n-public class StackOverflowService {\n-}"
+        },
+        {
+            "sha": "be2846916c56a2d0d06a90ae5de6363ae2d90c55",
+            "filename": "scrapper/src/test/java/edu/java/scrapper/integration/JdbcChatDaoTest.java",
+            "status": "added",
+            "additions": 37,
+            "deletions": 0,
+            "changes": 37,
+            "blob_url": "https://github.com/Ornstein385/tinkoff-java-course/blob/0c66d196c122c70e5b837af4370ab85f9163fc71/scrapper%2Fsrc%2Ftest%2Fjava%2Fedu%2Fjava%2Fscrapper%2Fintegration%2FJdbcChatDaoTest.java",
+            "raw_url": "https://github.com/Ornstein385/tinkoff-java-course/raw/0c66d196c122c70e5b837af4370ab85f9163fc71/scrapper%2Fsrc%2Ftest%2Fjava%2Fedu%2Fjava%2Fscrapper%2Fintegration%2FJdbcChatDaoTest.java",
+            "contents_url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/contents/scrapper%2Fsrc%2Ftest%2Fjava%2Fedu%2Fjava%2Fscrapper%2Fintegration%2FJdbcChatDaoTest.java?ref=0c66d196c122c70e5b837af4370ab85f9163fc71",
+            "patch": "@@ -0,0 +1,37 @@\n+package edu.java.scrapper.integration;\n+\n+import edu.java.jdbc.dao.JdbcChatDao;\n+import edu.java.jdbc.dto.ChatDto;\n+import java.time.OffsetDateTime;\n+import java.util.List;\n+import org.junit.jupiter.api.Test;\n+import org.springframework.test.annotation.Rollback;\n+import org.springframework.transaction.annotation.Transactional;\n+import static org.junit.jupiter.api.Assertions.assertEquals;\n+\n+public class JdbcChatDaoTest extends IntegrationTest {\n+    private JdbcChatDao chatDao = new JdbcChatDao(jdbcTemplate);\n+\n+    private static Long tgId = 123456L;\n+\n+    @Test\n+    @Transactional\n+    @Rollback\n+    void addAndFindAllTest() {\n+        ChatDto chatDto = new ChatDto(tgId, OffsetDateTime.now());\n+        chatDao.addChat(chatDto);\n+        List<ChatDto> chatDtos = chatDao.findAllChats();\n+        assertEquals(1, chatDtos == null ? 0 : chatDtos.size());\n+    }\n+\n+    @Test\n+    @Transactional\n+    @Rollback\n+    void removeAndFindAllTest() {\n+        ChatDto chatDto = new ChatDto(tgId, OffsetDateTime.now());\n+        chatDao.addChat(chatDto);\n+        chatDao.removeChat(tgId);\n+        List<ChatDto> chatDtos = chatDao.findAllChats();\n+        assertEquals(0, chatDtos == null ? 0 : chatDtos.size());\n+    }\n+}"
+        },
+        {
+            "sha": "4a6e7f0f650760745b80e1350e9d8701fd733c16",
+            "filename": "scrapper/src/test/java/edu/java/scrapper/integration/JdbcLinkDaoTest.java",
+            "status": "added",
+            "additions": 38,
+            "deletions": 0,
+            "changes": 38,
+            "blob_url": "https://github.com/Ornstein385/tinkoff-java-course/blob/0c66d196c122c70e5b837af4370ab85f9163fc71/scrapper%2Fsrc%2Ftest%2Fjava%2Fedu%2Fjava%2Fscrapper%2Fintegration%2FJdbcLinkDaoTest.java",
+            "raw_url": "https://github.com/Ornstein385/tinkoff-java-course/raw/0c66d196c122c70e5b837af4370ab85f9163fc71/scrapper%2Fsrc%2Ftest%2Fjava%2Fedu%2Fjava%2Fscrapper%2Fintegration%2FJdbcLinkDaoTest.java",
+            "contents_url": "https://api.github.com/repos/Ornstein385/tinkoff-java-course/contents/scrapper%2Fsrc%2Ftest%2Fjava%2Fedu%2Fjava%2Fscrapper%2Fintegration%2FJdbcLinkDaoTest.java?ref=0c66d196c122c70e5b837af4370ab85f9163fc71",
+            "patch": "@@ -0,0 +1,38 @@\n+package edu.java.scrapper.integration;\n+\n+import edu.java.jdbc.dao.JdbcLinkDao;\n+import edu.java.jdbc.dto.LinkDto;\n+import java.time.OffsetDateTime;\n+import java.util.List;\n+import org.junit.jupiter.api.Test;\n+import org.springframework.test.annotation.Rollback;\n+import org.springframework.transaction.annotation.Transactional;\n+import static org.junit.jupiter.api.Assertions.assertEquals;\n+\n+public class JdbcLinkDaoTest extends IntegrationTest {\n+\n+    private JdbcLinkDao linkDao = new JdbcLinkDao(jdbcTemplate);\n+\n+    private static String expectedUrl = \"https://github.com/Ornstein385/tinkoff-java-course\";\n+\n+    @Test\n+    @Transactional\n+    @Rollback\n+    void addAndFindAllTest() {\n+        LinkDto linkDto = new LinkDto(0L, expectedUrl, OffsetDateTime.now());\n+        linkDao.addLink(linkDto);\n+        List<LinkDto> linkDtos = linkDao.findAllLinks();\n+        assertEquals(1, linkDtos == null ? 0 : linkDtos.size());\n+    }\n+\n+    @Test\n+    @Transactional\n+    @Rollback\n+    void removeAndFindAllTest() {\n+        LinkDto linkDto = new LinkDto(0L, expectedUrl, OffsetDateTime.now());\n+        linkDao.addLink(linkDto);\n+        linkDao.removeLink(expectedUrl);\n+        List<LinkDto> linkDtos = linkDao.findAllLinks();\n+        assertEquals(0, linkDtos == null ? 0 : linkDtos.size());\n+    }\n+}"
+        }
+    ]
+}
