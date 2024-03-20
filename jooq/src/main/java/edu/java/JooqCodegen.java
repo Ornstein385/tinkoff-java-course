@@ -1,4 +1,4 @@
-package edu.java.jooq.codegen;
+package edu.java;
 
 import org.jooq.codegen.GenerationTool;
 import org.jooq.meta.jaxb.Configuration;
@@ -18,7 +18,7 @@ public class JooqCodegen {
             .withName("org.jooq.meta.extensions.liquibase.LiquibaseDatabase")
             .withProperties(
                 new Property().withKey("rootPath").withValue("migrations"),
-                new Property().withKey("scripts").withValue("master.xml")
+                new Property().withKey("scripts").withValue("master.yml")
             );
 
         Generate options = new Generate()
@@ -39,7 +39,7 @@ public class JooqCodegen {
             .withPojos(true);
 
         Target target = new Target()
-            .withPackageName("ru.tinkoff.edu.java.scrapper.domain.jooq")
+            .withPackageName("edu.java.jooq.domain") // Изменено на правильный путь
             .withDirectory("scrapper/src/main/java");
 
         Configuration configuration = new Configuration()
