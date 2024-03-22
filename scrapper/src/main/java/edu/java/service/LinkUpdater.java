@@ -43,7 +43,7 @@ public class LinkUpdater {
             ); //грузим ссылки частями
             for (Link link : linkList) {
                 if (LinkTypeDeterminant.isGitHubCorrectLink(link.getUrl())) {
-                    updateGitHub(link);
+                    //updateGitHub(link);
                 } else if (LinkTypeDeterminant.isStackOverflowCorrectLink(link.getUrl())) {
                     updateStackOverflow(link);
                 } else {
@@ -58,8 +58,8 @@ public class LinkUpdater {
         String repo = LinkTypeDeterminant.getGitHubRepo(link.getUrl());
         String owner = LinkTypeDeterminant.getGitHubOwner(link.getUrl());
 
-        GitHubBranchesResponse gitHubBranchesResponse = gitHubClient.fetchBranches(owner, repo);
-        for (GitHubBranchesResponse.Branch branch : gitHubBranchesResponse.branches()) {
+        List<GitHubBranchesResponse> gitHubBranchesResponses = gitHubClient.fetchBranches(owner, repo);
+        for (GitHubBranchesResponse branch : gitHubBranchesResponses) {
             GitHubCommitResponse gitHubCommitResponse = gitHubClient.fetchCommits(owner, repo, branch.commit().sha());
             if (gitHubCommitResponse.commit().committer().date().isAfter(link.getLastUpdated())) {
                 List<Long> tgChatIds = (List<Long>) linkService.listAllChatsForLink(link.getUrl());
@@ -67,10 +67,12 @@ public class LinkUpdater {
             }
         }
 
-        GitHubPullsResponse gitHubPullsResponse = gitHubClient.fetchPulls(owner, repo);
-        if (gitHubPullsResponse.updatedAt().isAfter(link.getLastUpdated())) {
-            List<Long> tgChatIds = (List<Long>) linkService.listAllChatsForLink(link.getUrl());
-            botClient.sendUpdate(new LinkUpdateRequest(1L, link.getUrl(), "github_pull", tgChatIds));
+        List<GitHubPullsResponse> gitHubPullsResponses = gitHubClient.fetchPulls(owner, repo);
+        for (GitHubPullsResponse pull : gitHubPullsResponses) {
+            if (pull.updatedAt().isAfter(link.getLastUpdated())) {
+                List<Long> tgChatIds = (List<Long>) linkService.listAllChatsForLink(link.getUrl());
+                botClient.sendUpdate(new LinkUpdateRequest(1L, link.getUrl(), "github_pull", tgChatIds));
+            }
         }
     }
 

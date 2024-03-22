@@ -4,7 +4,9 @@ import edu.java.dto.api.external.GitHubBranchesResponse;
 import edu.java.dto.api.external.GitHubCommitResponse;
 import edu.java.dto.api.external.GitHubPullsResponse;
 import edu.java.dto.api.external.GitHubRepoResponse;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -26,11 +28,12 @@ public class GitHubClientImpl implements GitHubClient {
     }
 
     @Override
-    public GitHubBranchesResponse fetchBranches(String owner, String repo) {
+    public List<GitHubBranchesResponse> fetchBranches(String owner, String repo) {
         return webClient.get()
             .uri("/repos/{owner}/{repo}/branches", owner, repo)
             .retrieve()
-            .bodyToMono(GitHubBranchesResponse.class).block();
+            .bodyToMono(new ParameterizedTypeReference<List<GitHubBranchesResponse>>() {
+            }).block();
     }
 
     @Override
@@ -42,10 +45,11 @@ public class GitHubClientImpl implements GitHubClient {
     }
 
     @Override
-    public GitHubPullsResponse fetchPulls(String owner, String repo) {
+    public List<GitHubPullsResponse> fetchPulls(String owner, String repo) {
         return webClient.get()
             .uri("/repos/{owner}/{repo}/pulls", owner, repo)
             .retrieve()
-            .bodyToMono(GitHubPullsResponse.class).block();
+            .bodyToMono(new ParameterizedTypeReference<List<GitHubPullsResponse>>() {
+            }).block();
     }
 }

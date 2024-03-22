@@ -2,8 +2,9 @@ package edu.java.bot.command;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import edu.java.bot.dao.LinkDaoInterface;
-import edu.java.bot.model.Link;
+import edu.java.bot.client.ScrapperClient;
+import edu.java.bot.dto.api.response.LinkResponse;
+import edu.java.bot.dto.api.response.ListLinksResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,11 +12,11 @@ import org.springframework.stereotype.Component;
 public class ListCommand implements Command {
 
     @Autowired
-    public void setLinkDao(LinkDaoInterface linkDao) {
-        this.linkDao = linkDao;
+    public ListCommand(ScrapperClient scrapperClient) {
+        this.scrapperClient = scrapperClient;
     }
 
-    public LinkDaoInterface linkDao;
+    private ScrapperClient scrapperClient;
 
     @Override
     public String getCommand() {
@@ -30,15 +31,16 @@ public class ListCommand implements Command {
     @Override
     public SendMessage handle(Update update) {
         long id = update.message().from().id();
-        if (linkDao.getSize(id) == 0) {
+        ListLinksResponse listLinksResponse = scrapperClient.getAllLinks(id);
+        if (listLinksResponse.getSize() == 0) {
             return new SendMessage(id, "нет отслеживаемых ссылок");
         }
 
         StringBuilder sb = new StringBuilder();
         int i = 1;
-        for (Link link : linkDao.getAll(id)) {
+        for (LinkResponse linkResponse : listLinksResponse.getLinks()) {
             sb.append(i).append(".\n");
-            sb.append(link.getUrl()).append("\n\n");
+            sb.append(linkResponse.getUrl()).append("\n\n");
             i++;
         }
         return new SendMessage(id, sb.toString());

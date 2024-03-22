@@ -1,7 +1,7 @@
 package edu.java.bot.controller;
 
-import edu.java.bot.dto.api.request.LinkUpdateRequest;
 import edu.java.bot.dto.api.response.ApiErrorResponse;
+import edu.java.bot.dto.api.response.LinkUpdateResponse;
 import edu.java.bot.telegram.Bot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,12 +23,12 @@ public class BotApiController {
     }
 
     @PostMapping
-    public ResponseEntity<?> sendUpdate(@RequestBody LinkUpdateRequest linkUpdateRequest) {
+    public ResponseEntity<?> sendUpdate(@RequestBody LinkUpdateResponse linkUpdateResponse) {
         try {
             bot.sendUpdate(
-                linkUpdateRequest.getUrl(),
-                linkUpdateRequest.getTgChatIds(),
-                linkUpdateRequest.getDescription()
+                linkUpdateResponse.getUrl(),
+                linkUpdateResponse.getTgChatIds(),
+                linkUpdateResponse.getDescription()
             );
             return ResponseEntity.ok().body("Обновление обработано");
         } catch (Exception e) {

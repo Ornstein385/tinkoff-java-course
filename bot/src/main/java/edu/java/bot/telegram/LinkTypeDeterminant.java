@@ -1,4 +1,4 @@
-package edu.java.service;
+package edu.java.bot.telegram;
 
 import java.net.URI;
 import java.util.regex.Matcher;

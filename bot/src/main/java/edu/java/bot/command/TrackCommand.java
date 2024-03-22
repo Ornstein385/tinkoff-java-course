@@ -2,9 +2,10 @@ package edu.java.bot.command;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import edu.java.bot.dao.LinkDaoInterface;
-import edu.java.bot.model.Link;
-import edu.java.bot.telegram.AllowedDomainChecker;
+import edu.java.bot.client.ScrapperClient;
+import edu.java.bot.dto.api.request.AddLinkRequest;
+import edu.java.bot.telegram.LinkTypeDeterminant;
+import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,11 +13,11 @@ import org.springframework.stereotype.Component;
 public class TrackCommand implements Command {
 
     @Autowired
-    public void setLinkDao(LinkDaoInterface linkDao) {
-        this.linkDao = linkDao;
+    public TrackCommand(ScrapperClient scrapperClient) {
+        this.scrapperClient = scrapperClient;
     }
 
-    public LinkDaoInterface linkDao;
+    private ScrapperClient scrapperClient;
 
     @Override
     public String getCommand() {
@@ -35,9 +36,9 @@ public class TrackCommand implements Command {
         if (parts.length < 2) {
             return new SendMessage(id, "некорректный формат команды");
         }
-        Link link = new Link(id, parts[1]);
-        if (AllowedDomainChecker.isAllowed(link)) {
-            linkDao.add(link);
+        URI url = URI.create(parts[1]);
+        if (LinkTypeDeterminant.isCorrectLink(url)) {
+            scrapperClient.addLink(id, new AddLinkRequest(url));
             return new SendMessage(id, "ссылка добавлена для отслеживания");
         } else {
             return new SendMessage(id, "ресурс пока не поддерживается");

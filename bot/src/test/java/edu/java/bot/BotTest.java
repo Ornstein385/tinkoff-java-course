@@ -1,9 +1,9 @@
 package edu.java.bot;
 
-/*
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
+import edu.java.bot.client.ScrapperClient;
 import edu.java.bot.command.CommandKeeper;
 import edu.java.bot.command.HelpCommand;
 import edu.java.bot.command.ListCommand;
@@ -11,11 +11,14 @@ import edu.java.bot.command.StartCommand;
 import edu.java.bot.command.TrackCommand;
 import edu.java.bot.command.UntrackCommand;
 import edu.java.bot.configuration.ApplicationConfig;
-import edu.java.bot.dao.LinkDaoInterface;
-import edu.java.bot.model.Link;
+import edu.java.bot.dto.api.request.AddLinkRequest;
+import edu.java.bot.dto.api.request.RemoveLinkRequest;
+import edu.java.bot.dto.api.response.LinkResponse;
+import edu.java.bot.dto.api.response.ListLinksResponse;
 import edu.java.bot.telegram.Bot;
+import java.net.URI;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -28,21 +31,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyLong;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
- */
-
 public class BotTest {
-/*
+
     @Mock
     private TelegramBot bot;
     @Mock
     private ApplicationConfig config;
-    @Spy
-    private LinkDaoInterface linkDao;//TODO вместо dao теперь webclient
+    @Mock
+    private ScrapperClient scrapperClient;
     @Spy
     private CommandKeeper commandKeeper;
 
@@ -53,14 +53,23 @@ public class BotTest {
     private ArgumentCaptor<SendMessage> sendMessageCaptor;
 
     @BeforeEach
-    public void setup() {
+    public void setupBeforeEach() {
         MockitoAnnotations.openMocks(this);
 
-        HelpCommand helpCommand = new HelpCommand(bot, linkDao);
-        helpCommand.setCommandKeeper(commandKeeper);
-        commandKeeper.setupCommands(Arrays.asList(new StartCommand(bot, linkDao), new TrackCommand(bot, linkDao),
-            new UntrackCommand(bot, linkDao), new ListCommand(bot, linkDao), helpCommand
+        StartCommand startCommand = new StartCommand(scrapperClient);
+        TrackCommand trackCommand = new TrackCommand(scrapperClient);
+        UntrackCommand untrackCommand = new UntrackCommand(scrapperClient);
+        ListCommand listCommand = new ListCommand(scrapperClient);
+        HelpCommand helpCommand = new HelpCommand();
+        commandKeeper.setupCommands(Arrays.asList(
+            startCommand,
+            trackCommand,
+            untrackCommand,
+            listCommand,
+            helpCommand
         ));
+
+        helpCommand.setCommands(Arrays.stream(commandKeeper.getAll()).toList());
     }
 
     private void simulateUpdate(String text, long userId) {
@@ -71,6 +80,17 @@ public class BotTest {
         when(mockUpdate.message().from().id()).thenReturn(userId);
 
         testBot.handleUpdate(mockUpdate);
+    }
+
+    private void simulateAddLink(long userId, URI url) {
+        AddLinkRequest addLinkRequest = new AddLinkRequest(url);
+        LinkResponse linkResponse = new LinkResponse(userId, url);
+        when(scrapperClient.addLink(userId, addLinkRequest)).thenReturn(linkResponse);
+    }
+
+    private void simulateRemoveLink(long userId, URI url) {
+        RemoveLinkRequest removeLinkRequest = new RemoveLinkRequest(url);
+        when(scrapperClient.removeLink(userId, removeLinkRequest)).thenReturn("200");
     }
 
     @Test
@@ -90,7 +110,8 @@ public class BotTest {
     @Test
     public void testTrackCommandWithValidDomain() {
         simulateUpdate("/track https://github.com/user/repo", 123L);
-        verify(linkDao).add(any());
+        simulateAddLink(123L, URI.create("https://github.com/user/repo"));
+        verify(scrapperClient).addLink(123L, new AddLinkRequest(URI.create("https://github.com/user/repo")));
     }
 
     @Test
@@ -103,12 +124,13 @@ public class BotTest {
     @Test
     public void testUntrackCommandWithExistingLink() {
         simulateUpdate("/untrack https://github.com/user/repo", 123L);
-        verify(linkDao).remove(any());
+        simulateRemoveLink(123L, URI.create("https://github.com/user/repo"));
+        verify(scrapperClient).removeLink(123L, new RemoveLinkRequest(URI.create("https://github.com/user/repo")));
     }
 
     @Test
     public void testListCommandWithNoLinks() {
-        when(linkDao.getSize(anyLong())).thenReturn(0);
+        when(scrapperClient.getAllLinks(any())).thenReturn(new ListLinksResponse(Collections.emptyList(), 0));
         simulateUpdate("/list", 123L);
         verify(bot).execute(sendMessageCaptor.capture());
         assertEquals("нет отслеживаемых ссылок", sendMessageCaptor.getValue().getParameters().get("text"));
@@ -116,8 +138,10 @@ public class BotTest {
 
     @Test
     public void testListCommandWithLinks() {
-        when(linkDao.getSize(anyLong())).thenReturn(1);
-        when(linkDao.getAll(anyLong())).thenReturn(List.of(new Link(123L, "https://github.com/user/repo")));
+        when(scrapperClient.getAllLinks(any())).thenReturn(new ListLinksResponse(Collections.singletonList(new LinkResponse(
+            123L,
+            URI.create("https://github.com/user/repo")
+        )), 1));
         simulateUpdate("/list", 123L);
         verify(bot).execute(sendMessageCaptor.capture());
         String messageText = (String) sendMessageCaptor.getValue().getParameters().get("text");
@@ -141,5 +165,4 @@ public class BotTest {
         );
     }
 
- */
 }
