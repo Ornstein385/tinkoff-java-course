@@ -4,10 +4,6 @@ import edu.java.client.BotClient;
 import edu.java.client.GitHubClient;
 import edu.java.client.StackOverflowClient;
 import edu.java.configuration.ApplicationConfig;
-import edu.java.dto.api.external.GitHubBranchesResponse;
-import edu.java.dto.api.external.GitHubCommitResponse;
-import edu.java.dto.api.external.GitHubPullsResponse;
-import edu.java.dto.api.internal.request.LinkUpdateRequest;
 import edu.java.model.Link;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -43,7 +39,7 @@ public class LinkUpdater {
             ); //грузим ссылки частями
             for (Link link : linkList) {
                 if (LinkTypeDeterminant.isGitHubCorrectLink(link.getUrl())) {
-                    //updateGitHub(link);
+                    updateGitHub(link);
                 } else if (LinkTypeDeterminant.isStackOverflowCorrectLink(link.getUrl())) {
                     updateStackOverflow(link);
                 } else {
@@ -55,28 +51,10 @@ public class LinkUpdater {
     }
 
     private void updateGitHub(Link link) {
-        String repo = LinkTypeDeterminant.getGitHubRepo(link.getUrl());
-        String owner = LinkTypeDeterminant.getGitHubOwner(link.getUrl());
-
-        List<GitHubBranchesResponse> gitHubBranchesResponses = gitHubClient.fetchBranches(owner, repo);
-        for (GitHubBranchesResponse branch : gitHubBranchesResponses) {
-            GitHubCommitResponse gitHubCommitResponse = gitHubClient.fetchCommits(owner, repo, branch.commit().sha());
-            if (gitHubCommitResponse.commit().committer().date().isAfter(link.getLastUpdated())) {
-                List<Long> tgChatIds = (List<Long>) linkService.listAllChatsForLink(link.getUrl());
-                botClient.sendUpdate(new LinkUpdateRequest(1L, link.getUrl(), "github_commit", tgChatIds));
-            }
-        }
-
-        List<GitHubPullsResponse> gitHubPullsResponses = gitHubClient.fetchPulls(owner, repo);
-        for (GitHubPullsResponse pull : gitHubPullsResponses) {
-            if (pull.updatedAt().isAfter(link.getLastUpdated())) {
-                List<Long> tgChatIds = (List<Long>) linkService.listAllChatsForLink(link.getUrl());
-                botClient.sendUpdate(new LinkUpdateRequest(1L, link.getUrl(), "github_pull", tgChatIds));
-            }
-        }
+        //реализовано через бонусное задание
     }
 
     private void updateStackOverflow(Link link) {
-
+        //реализовано через бонусное задание
     }
 }

@@ -4,6 +4,4 @@
     "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
     "https://checkstyle.org/dtds/suppressions_1_2.dtd">
 
-<suppressions>
-    <suppress files="scrapper[/\\]src[/\\]main[/\\]java[/\\]edu[/\\]java[/\\]jooq[/\\]domain[/\\].*" checks=".*"/>
-</suppressions>
+<suppressions></suppressions>
