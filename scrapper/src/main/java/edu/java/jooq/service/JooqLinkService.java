@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class JooqLinkService implements LinkService {
 
@@ -41,8 +42,8 @@ public class JooqLinkService implements LinkService {
         chatDao.addChat(new ChatDto(tgChatId, OffsetDateTime.now()));
         linkDao.addLink(new LinkDto(null, url.toString(), OffsetDateTime.now()));
         Long linkId = linkDao.getLink(url.toString())
-            .orElseThrow(() -> new NoSuchElementException("URL not found when adding: " + url))
-            .getId();
+                .orElseThrow(() -> new NoSuchElementException("URL not found when adding: " + url))
+                .getId();
         linkChatDao.addLinkChat(new LinkChatDto(linkId, tgChatId, OffsetDateTime.now()));
     }
 
@@ -54,8 +55,8 @@ public class JooqLinkService implements LinkService {
     @Override
     public void remove(long tgChatId, URI url) {
         Long linkId = linkDao.getLink(url.toString())
-            .orElseThrow(() -> new NoSuchElementException("URL not found when removing: " + url))
-            .getId();
+                .orElseThrow(() -> new NoSuchElementException("URL not found when removing: " + url))
+                .getId();
         linkChatDao.removeLinkChat(linkId, tgChatId);
     }
 
@@ -63,28 +64,28 @@ public class JooqLinkService implements LinkService {
     public Collection<Link> listAllLinksForChat(long tgChatId) {
         List<LinkDto> list = linkChatDao.findAllLinksForChat(tgChatId);
         return list.stream().map(dto -> new Link(URI.create(dto.getUrl()), dto.getLastUpdated()))
-            .collect(Collectors.toList());
+                .collect(Collectors.toList());
     }
 
     @Override
     public Collection<Link> listAllLinksForChat(long tgChatId, long millisecondsBack, int limit) {
         List<LinkDto> list = linkChatDao.findAllLinksForChat(tgChatId, millisecondsBack, limit);
         return list.stream().map(dto -> new Link(URI.create(dto.getUrl()), dto.getLastUpdated()))
-            .collect(Collectors.toList());
+                .collect(Collectors.toList());
     }
 
     @Override
     public Collection<Link> listAllLinks() {
         List<LinkDto> list = linkDao.findAllLinks();
         return list.stream().map(dto -> new Link(URI.create(dto.getUrl()), dto.getLastUpdated()))
-            .collect(Collectors.toList());
+                .collect(Collectors.toList());
     }
 
     @Override
     public Collection<Link> listAllLinks(long millisecondsBack, int limit) {
         List<LinkDto> list = linkDao.findAllLinks(millisecondsBack, limit);
         return list.stream().map(dto -> new Link(URI.create(dto.getUrl()), dto.getLastUpdated()))
-            .collect(Collectors.toList());
+                .collect(Collectors.toList());
     }
 
     @Override
