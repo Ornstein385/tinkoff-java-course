@@ -1,9 +1,11 @@
-package edu.java.scrapper.integration;
+package edu.java.scrapper.integration.jdbc;
 
 import edu.java.jdbc.dao.JdbcLinkDao;
 import edu.java.jdbc.dto.LinkDto;
 import java.time.OffsetDateTime;
 import java.util.List;
+
+import edu.java.scrapper.integration.IntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
