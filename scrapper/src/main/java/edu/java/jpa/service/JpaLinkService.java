@@ -14,7 +14,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,18 +21,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class JpaLinkService implements LinkService {
 
-    private final JpaChatRepository chatRepository;
     private final JpaLinkRepository linkRepository;
+    private final JpaChatRepository chatRepository;
     private final JpaLinkChatRepository linkChatRepository;
 
-    @Autowired
     public JpaLinkService(
-        JpaChatRepository chatRepository,
         JpaLinkRepository linkRepository,
+        JpaChatRepository chatRepository,
         JpaLinkChatRepository linkChatRepository
     ) {
-        this.chatRepository = chatRepository;
         this.linkRepository = linkRepository;
+        this.chatRepository = chatRepository;
         this.linkChatRepository = linkChatRepository;
     }
 

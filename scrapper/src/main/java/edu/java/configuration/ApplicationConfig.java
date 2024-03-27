@@ -12,15 +12,8 @@ public record ApplicationConfig(
     Scheduler scheduler,
 
     @NotNull
-    DataSource dataSource,
-
-    @NotNull
     AccessType databaseAccessType
 ) {
     public record Scheduler(boolean enable, @NotNull Duration interval, @NotNull Duration forceCheckDelay) {
-    }
-
-    public record DataSource(String url, String username, String password, int maxResultLimit,
-                             AccessType databaseAccessType) {
     }
 }

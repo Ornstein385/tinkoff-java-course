@@ -5,8 +5,9 @@ import edu.java.jdbc.dao.JdbcLinkChatDao;
 import edu.java.jdbc.dao.JdbcLinkDao;
 import edu.java.jdbc.service.JdbcLinkService;
 import edu.java.service.LinkService;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,11 +15,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @Configuration
 @ConditionalOnProperty(prefix = "app", name = "database-access-type", havingValue = "jdbc")
 public class JdbcAccessConfiguration {
+
+    private final DataSource dataSource;
+
+    @Autowired
+    public JdbcAccessConfiguration(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     @Bean
-    public JdbcTemplate jdbcTemplate(ApplicationConfig applicationConfig) {
-        return new JdbcTemplate(DataSourceBuilder.create().url(applicationConfig.dataSource().url())
-            .username(applicationConfig.dataSource().username()).password(applicationConfig.dataSource().password())
-            .driverClassName("org.postgresql.Driver").build());
+    public JdbcTemplate jdbcTemplate() {
+        return new JdbcTemplate(dataSource);
     }
 
     @Bean
