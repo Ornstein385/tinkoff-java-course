@@ -3,8 +3,13 @@ app:
     enable: true
     interval: 10000
     force-check-delay: 10000
-  database:
+  data-source:
+    url: jdbc:postgresql://localhost:5433/scrapper
+    username: postgres
+    password: postgres
     max-result-limit: 100
+    database-access-type: jdbc
+
 
 spring:
   application:
