@@ -12,11 +12,10 @@ public record ApplicationConfig(
     Scheduler scheduler,
 
     @NotNull
-    Database database
+    AccessType databaseAccessType,
+
+    int maxResultLimit
 ) {
     public record Scheduler(boolean enable, @NotNull Duration interval, @NotNull Duration forceCheckDelay) {
-    }
-
-    public record Database(int maxResultLimit) {
     }
 }

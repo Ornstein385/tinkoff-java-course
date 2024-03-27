@@ -3,12 +3,23 @@ app:
     enable: true
     interval: 10000
     force-check-delay: 10000
-  database:
-    max-result-limit: 100
+  max-result-limit: 100
+
 
 spring:
   application:
     name: scrapper
+  datasource:
+    url: jdbc:postgresql://localhost:5433/scrapper
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    jpa:
+      hibernate:
+        ddl-auto: validate
+      show-sql: true
+    liquibase:
+      enabled: false
 
 server:
   port: 8091

@@ -42,7 +42,7 @@ public class LinkUpdater {
         do {
             linkList = (List<Link>) linkService.listAllLinks(
                 applicationConfig.scheduler().interval().toMillis(),
-                applicationConfig.database().maxResultLimit()
+                applicationConfig.maxResultLimit()
             ); //грузим ссылки частями
             for (Link link : linkList) {
                 if (LinkTypeDeterminant.isGitHubCorrectLink(link.getUrl())) {
