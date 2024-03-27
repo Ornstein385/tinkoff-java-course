@@ -23,9 +23,6 @@ public class LinkUpdaterScheduler {
         "#{beanFactory.getBean(T(edu.java.configuration.ApplicationConfig)).scheduler.interval}")
     //@Scheduled(fixedDelayString = "#{@('app-edu.java.configuration.ApplicationConfig').scheduler.interval}")
     public void update() {
-
-        //log.info("Updating info...");
-        //log.info(stackOverflowClient.fetchQuestion("59771574").toString());
-        //log.info(gitHubClient.fetchRepository("Ornstein385", "tinkoff-java-course").toString());
+        linkUpdater.update();
     }
 }

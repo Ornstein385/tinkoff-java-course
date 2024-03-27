@@ -38,7 +38,7 @@ public class LinkChatEntity {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    static class LinkChatId implements Serializable {
+    public static class LinkChatId implements Serializable {
         private Long link;
         private Long chat;
 
